@@ -1,0 +1,610 @@
+{
+  "pflanzen": [
+    {
+      "id": 1,
+      "lateinisch": "Matricaria chamomilla",
+      "deutsch": "Echte Kamille",
+      "symptome": [
+        "Magen-Darm-Beschwerden",
+        "Entzündungen",
+        "Schlafprobleme",
+        "Hautreizungen"
+      ],
+      "wirkung": [
+        "Entzündungshemmend",
+        "Krampflösend",
+        "Beruhigend",
+        "Wundheilungsfördernd"
+      ],
+      "zubereitung": "Blüten: Tee (1-2 TL, 10 Min ziehen), Aufguss zum Gurgeln oder für Umschläge",
+      "bluete_erntezeit": "Mai bis September",
+      "vorkommen": "Äcker, Wegränder, Brachflächen, bevorzugt nährstoffreiche Böden",
+      "nebenwirkungen": "Sehr selten allergische Reaktionen (Korbblütler-Allergie)",
+      "kontraindikationen": "Allergie gegen Korbblütler",
+      "nahrungsmittel": "Ja (Tee, Blüten)",
+      "bild": "images/kamille.png",
+      "erntemonate": [
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September"
+      ]
+    },
+    {
+      "id": 2,
+      "lateinisch": "Mentha piperita",
+      "deutsch": "Pfefferminze",
+      "symptome": [
+        "Verdauungsbeschwerden",
+        "Reizdarmsyndrom",
+        "Übelkeit",
+        "Spannungskopfschmerzen"
+      ],
+      "wirkung": [
+        "Krampflösend",
+        "Verdauungsfördernd",
+        "Schmerzlindernd",
+        "Kühlend"
+      ],
+      "zubereitung": "Blätter: Tee (1-2 TL, 5-10 Min ziehen), frisch oder getrocknet",
+      "bluete_erntezeit": "Juni bis September",
+      "vorkommen": "Feuchte Standorte, Gärten, Ufer, verwildert an Bach- und Flussufern",
+      "nebenwirkungen": "Selten Sodbrennen, bei Überdosierung Magenschleimhautreizung",
+      "kontraindikationen": "Gallensteine, Verschluss der Gallenwege, schwere Leberschäden",
+      "nahrungsmittel": "Ja (Tee, Gewürz, Blätter)",
+      "bild": "images/pfefferminze.png",
+      "erntemonate": [
+        "Juni",
+        "Juli",
+        "August",
+        "September"
+      ]
+    },
+    {
+      "id": 3,
+      "lateinisch": "Urtica dioica",
+      "deutsch": "Große Brennnessel",
+      "symptome": [
+        "Harnwegsbeschwerden",
+        "Prostatabeschwerden",
+        "Arthrose",
+        "Entzündungen"
+      ],
+      "wirkung": [
+        "Harntreibend",
+        "Entzündungshemmend",
+        "Entgiftend",
+        "Durchblutungsfördernd"
+      ],
+      "zubereitung": "Blätter: Tee (2 TL, 10 Min ziehen), junge Triebe und Blätter als Gemüse",
+      "bluete_erntezeit": "März bis Oktober (Blätter), Samen August-Oktober",
+      "vorkommen": "Nährstoffreiche Böden, Waldränder, Wegränder, Gärten, Schuttplätze",
+      "nebenwirkungen": "Selten Magen-Darm-Beschwerden oder Hautreaktionen",
+      "kontraindikationen": "Ödeme bei Herz- oder Niereninsuffizienz",
+      "nahrungsmittel": "Ja (junge Blätter als Gemüse, Tee, Samen)",
+      "bild": "images/brennnessel.png",
+      "erntemonate": [
+        "März",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober"
+      ]
+    },
+    {
+      "id": 4,
+      "lateinisch": "Salvia officinalis",
+      "deutsch": "Echter Salbei",
+      "symptome": [
+        "Halsschmerzen",
+        "Zahnfleischentzündungen",
+        "übermäßiges Schwitzen",
+        "Verdauungsbeschwerden"
+      ],
+      "wirkung": [
+        "Antibakteriell",
+        "Schweißhemmend",
+        "Entzündungshemmend",
+        "Adstringierend"
+      ],
+      "zubereitung": "Blätter: Tee (1 TL, 10 Min ziehen) oder zum Gurgeln, 3x täglich",
+      "bluete_erntezeit": "Mai bis Juli",
+      "vorkommen": "Trockene, sonnige Standorte, Gärten, Weinberge, kalkhaltige Böden",
+      "nebenwirkungen": "Bei Langzeitanwendung hoher Dosen Schwindel durch Thujon",
+      "kontraindikationen": "Schwangerschaft, Stillzeit (in therapeutischen Dosen)",
+      "nahrungsmittel": "Ja (Gewürz, Tee)",
+      "bild": "images/salbei.png",
+      "erntemonate": [
+        "Mai",
+        "Juni",
+        "Juli"
+      ]
+    },
+    {
+      "id": 5,
+      "lateinisch": "Thymus vulgaris",
+      "deutsch": "Echter Thymian",
+      "symptome": [
+        "Husten",
+        "Bronchitis",
+        "Erkältungen",
+        "Verdauungsbeschwerden"
+      ],
+      "wirkung": [
+        "Schleimlösend",
+        "Antibakteriell",
+        "Krampflösend",
+        "Auswurffördernd"
+      ],
+      "zubereitung": "Kraut: Tee (1-2 TL, 10 Min ziehen), 3-4x täglich",
+      "bluete_erntezeit": "Mai bis September",
+      "vorkommen": "Trockene, sonnige Hänge, Gärten, Magerrasen, mediterrane Regionen",
+      "nebenwirkungen": "Selten Überempfindlichkeitsreaktionen",
+      "kontraindikationen": "Schilddrüsenüberfunktion (bei ätherischem Öl)",
+      "nahrungsmittel": "Ja (Gewürz, Tee)",
+      "bild": "images/thymian.png",
+      "erntemonate": [
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September"
+      ]
+    },
+    {
+      "id": 6,
+      "lateinisch": "Hypericum perforatum",
+      "deutsch": "Echtes Johanniskraut",
+      "symptome": [
+        "Leichte bis mittelschwere Depressionen",
+        "Nervöse Unruhe",
+        "Stimmungsschwankungen"
+      ],
+      "wirkung": [
+        "Antidepressiv",
+        "Stimmungsaufhellend",
+        "Nervenberuhigend"
+      ],
+      "zubereitung": "Blühendes Kraut: Tee (1-2 TL, 10 Min ziehen), 2-3x täglich über mehrere Wochen",
+      "bluete_erntezeit": "Juni bis August",
+      "vorkommen": "Trockene Wiesen, Wegränder, Waldlichtungen, sonnige Standorte",
+      "nebenwirkungen": "Photosensibilisierung (erhöhte Lichtempfindlichkeit), Wechselwirkungen mit vielen Medikamenten",
+      "kontraindikationen": "Einnahme von Antidepressiva, Immunsuppressiva, Antikoagulanzien, Antibabypille u.v.m.",
+      "nahrungsmittel": "Nein (nur als Arzneipflanze)",
+      "bild": "images/johanniskraut.png",
+      "erntemonate": [
+        "Juni",
+        "Juli",
+        "August"
+      ]
+    },
+    {
+      "id": 7,
+      "lateinisch": "Valeriana officinalis",
+      "deutsch": "Echter Baldrian",
+      "symptome": [
+        "Schlafstörungen",
+        "Nervöse Unruhe",
+        "Angstzustände",
+        "Nervosität"
+      ],
+      "wirkung": [
+        "Beruhigend",
+        "Schlaffördernd",
+        "Angstlösend",
+        "Entspannend"
+      ],
+      "zubereitung": "Wurzel: Tee (1-2 TL zerkleinerte Wurzel, kalt ansetzen, nach 8-12 Std. abseihen) oder Kaltauszug erwärmen",
+      "bluete_erntezeit": "Mai bis August (Blüte), Wurzeln im Herbst ab 2. Jahr",
+      "vorkommen": "Feuchte Wiesen, Gräben, Bachläufe, Waldränder",
+      "nebenwirkungen": "Selten Magen-Darm-Beschwerden, Kopfschmerzen, paradoxe Erregung möglich",
+      "kontraindikationen": "Keine bekannt, Vorsicht bei Leberschäden",
+      "nahrungsmittel": "Nein (nur als Arzneipflanze)",
+      "bild": "images/baldrian.png",
+      "erntemonate": [
+        "Mai",
+        "Juni",
+        "Juli",
+        "August"
+      ]
+    },
+    {
+      "id": 8,
+      "lateinisch": "Crataegus monogyna / Crataegus laevigata",
+      "deutsch": "Eingriffeliger / Zweigriffeliger Weißdorn",
+      "symptome": [
+        "Leichte Herzinsuffizienz",
+        "Herzbeschwerden",
+        "Durchblutungsstörungen",
+        "Altersherz"
+      ],
+      "wirkung": [
+        "Herzstärkend",
+        "Durchblutungsfördernd",
+        "Blutdruckregulierend"
+      ],
+      "zubereitung": "Blätter mit Blüten: Tee (1-2 TL, 10-15 Min ziehen), 2-3x täglich über Wochen/Monate",
+      "bluete_erntezeit": "Mai bis Juni (Blüten), September-Oktober (Früchte)",
+      "vorkommen": "Waldränder, Hecken, Gebüsche, lichte Wälder",
+      "nebenwirkungen": "Sehr selten, eventuell leichte Magen-Darm-Beschwerden",
+      "kontraindikationen": "Keine bekannt, aber ärztliche Kontrolle bei Herzerkrankungen wichtig",
+      "nahrungsmittel": "Ja (Früchte, Blüten)",
+      "bild": "images/weissdorn.png",
+      "erntemonate": [
+        "Mai",
+        "Juni",
+        "September",
+        "Oktober"
+      ]
+    },
+    {
+      "id": 9,
+      "lateinisch": "Tilia cordata / Tilia platyphyllos",
+      "deutsch": "Winter-Linde / Sommer-Linde",
+      "symptome": [
+        "Erkältungen",
+        "Fieber",
+        "Husten",
+        "Nervöse Unruhe"
+      ],
+      "wirkung": [
+        "Schweißtreibend",
+        "Fiebersenkend",
+        "Schleimlösend",
+        "Beruhigend"
+      ],
+      "zubereitung": "Blüten: Tee (1-2 TL, 10 Min ziehen), heiß trinken bei Erkältung",
+      "bluete_erntezeit": "Juni (Winterlinde), Juli (Sommerlinde)",
+      "vorkommen": "Wälder, Parks, Alleen, Einzelbäume",
+      "nebenwirkungen": "Sehr selten, bei sehr häufigem Konsum leichte Herzbelastung möglich",
+      "kontraindikationen": "Keine bekannt",
+      "nahrungsmittel": "Ja (junge Blätter, Blüten)",
+      "bild": "images/linde.png",
+      "erntemonate": [
+        "Juni",
+        "Juli"
+      ]
+    },
+    {
+      "id": 10,
+      "lateinisch": "Plantago lanceolata",
+      "deutsch": "Spitzwegerich",
+      "symptome": [
+        "Husten",
+        "Bronchitis",
+        "Halsschmerzen",
+        "Wunden",
+        "Insektenstiche"
+      ],
+      "wirkung": [
+        "Schleimlösend",
+        "Hustenstillend",
+        "Antibakteriell",
+        "Wundheilend",
+        "Entzündungshemmend"
+      ],
+      "zubereitung": "Blätter: Tee (2 TL, 10 Min ziehen) oder frische Blätter zerquetscht auf Insektenstiche",
+      "bluete_erntezeit": "April bis September",
+      "vorkommen": "Wiesen, Wegränder, Weiden, Rasenflächen",
+      "nebenwirkungen": "Sehr selten allergische Reaktionen",
+      "kontraindikationen": "Keine bekannt",
+      "nahrungsmittel": "Ja (junge Blätter als Salat/Gemüse)",
+      "bild": "images/spitzwegerich.png",
+      "erntemonate": [
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September"
+      ]
+    },
+    {
+      "id": 11,
+      "lateinisch": "Melissa officinalis",
+      "deutsch": "Zitronenmelisse",
+      "symptome": [
+        "Nervöse Unruhe",
+        "Einschlafstörungen",
+        "Magen-Darm-Beschwerden",
+        "Herpes"
+      ],
+      "wirkung": [
+        "Beruhigend",
+        "Krampflösend",
+        "Verdauungsfördernd",
+        "Antiviral"
+      ],
+      "zubereitung": "Blätter: Tee (2-3 TL, 10 Min ziehen, Gefäß abdecken), frisch oder getrocknet",
+      "bluete_erntezeit": "Juni bis August",
+      "vorkommen": "Gärten, verwildert an Wegrändern, warme Standorte",
+      "nebenwirkungen": "Sehr selten",
+      "kontraindikationen": "Keine bekannt, bei Schilddrüsenunterfunktion Vorsicht",
+      "nahrungsmittel": "Ja (Tee, Gewürz, Salat)",
+      "bild": "images/zitronenmelisse.png",
+      "erntemonate": [
+        "Juni",
+        "Juli",
+        "August"
+      ]
+    },
+    {
+      "id": 12,
+      "lateinisch": "Foeniculum vulgare",
+      "deutsch": "Fenchel",
+      "symptome": [
+        "Blähungen",
+        "Verdauungsbeschwerden",
+        "Völlegefühl",
+        "Husten bei Säuglingen"
+      ],
+      "wirkung": [
+        "Blähungstreibend",
+        "Krampflösend",
+        "Verdauungsfördernd",
+        "Schleimlösend"
+      ],
+      "zubereitung": "Samen: Tee (1-2 TL zerdrückte Samen, 10 Min ziehen), vor dem Trinken zerstoßen",
+      "bluete_erntezeit": "Juli bis September (Samen August-Oktober)",
+      "vorkommen": "Gärten, verwildert an sonnigen, warmen Standorten",
+      "nebenwirkungen": "Sehr selten allergische Reaktionen",
+      "kontraindikationen": "Östrogensensitive Erkrankungen (in hohen Dosen)",
+      "nahrungsmittel": "Ja (Knolle, Samen, Kraut als Gewürz)",
+      "bild": "images/fenchel.png",
+      "erntemonate": [
+        "Juli",
+        "August",
+        "September",
+        "Oktober"
+      ]
+    },
+    {
+      "id": 13,
+      "lateinisch": "Taraxacum officinale",
+      "deutsch": "Gewöhnlicher Löwenzahn",
+      "symptome": [
+        "Verdauungsbeschwerden",
+        "Appetitlosigkeit",
+        "Gallenbeschwerden",
+        "Harnwegserkrankungen"
+      ],
+      "wirkung": [
+        "Verdauungsfördernd",
+        "Harntreibend",
+        "Galleflussfördernd",
+        "Appetitanregend"
+      ],
+      "zubereitung": "Blätter/Wurzel: Tee (1-2 TL, 10 Min ziehen), frische junge Blätter auch als Salat",
+      "bluete_erntezeit": "März bis Mai (Blätter), September-Oktober (Wurzeln)",
+      "vorkommen": "Wiesen, Wegränder, Gärten, Rasenflächen, überall häufig",
+      "nebenwirkungen": "Selten Magenbeschwerden, Kontaktallergien (Milchsaft)",
+      "kontraindikationen": "Gallenwegsverschluss, Darmverschluss",
+      "nahrungsmittel": "Ja (Blätter, Blüten, Wurzel)",
+      "bild": "images/loewenzahn.png",
+      "erntemonate": [
+        "März",
+        "April",
+        "Mai",
+        "September",
+        "Oktober"
+      ]
+    },
+    {
+      "id": 14,
+      "lateinisch": "Achillea millefolium",
+      "deutsch": "Schafgarbe",
+      "symptome": [
+        "Verdauungsbeschwerden",
+        "Appetitlosigkeit",
+        "Menstruationsbeschwerden",
+        "Wunden"
+      ],
+      "wirkung": [
+        "Krampflösend",
+        "Entzündungshemmend",
+        "Blutstillend",
+        "Verdauungsfördernd"
+      ],
+      "zubereitung": "Blühendes Kraut: Tee (1-2 TL, 10 Min ziehen), äußerlich als Sitzbad bei Unterleibsbeschwerden",
+      "bluete_erntezeit": "Juni bis September",
+      "vorkommen": "Wiesen, Wegränder, Trockenrasen, häufig und weit verbreitet",
+      "nebenwirkungen": "Selten allergische Hautreaktionen (Korbblütler), Photosensibilisierung",
+      "kontraindikationen": "Allergie gegen Korbblütler, Schwangerschaft",
+      "nahrungsmittel": "Ja (junge Blätter als Gewürz, Tee)",
+      "bild": "images/schafgarbe.png",
+      "erntemonate": [
+        "Juni",
+        "Juli",
+        "August",
+        "September"
+      ]
+    },
+    {
+      "id": 15,
+      "lateinisch": "Sambucus nigra",
+      "deutsch": "Schwarzer Holunder",
+      "symptome": [
+        "Erkältungen",
+        "Fieber",
+        "Grippe",
+        "Immunschwäche"
+      ],
+      "wirkung": [
+        "Schweißtreibend",
+        "Immunstimulierend",
+        "Antiviral",
+        "Entzündungshemmend"
+      ],
+      "zubereitung": "Blüten: Tee (2 TL, 10 Min ziehen), heiß trinken bei Erkältung. Beeren nur gekocht verwenden!",
+      "bluete_erntezeit": "Mai bis Juni (Blüten), August bis September (Beeren)",
+      "vorkommen": "Waldränder, Hecken, Gärten, Schuttplätze, nährstoffreiche Böden",
+      "nebenwirkungen": "Rohe Beeren/Blätter/Rinde giftig (Übelkeit, Erbrechen)",
+      "kontraindikationen": "Keine (bei korrekter Anwendung)",
+      "nahrungsmittel": "Ja (Blüten roh, Beeren nur gekocht)",
+      "bild": "images/holunder.png",
+      "erntemonate": [
+        "Mai",
+        "Juni",
+        "August",
+        "September"
+      ]
+    },
+    {
+      "id": 16,
+      "lateinisch": "Equisetum arvense",
+      "deutsch": "Acker-Schachtelhalm / Zinnkraut",
+      "symptome": [
+        "Harnwegsinfekte",
+        "Ödeme",
+        "Blasenschwäche",
+        "Nierensteine (vorbeugend)"
+      ],
+      "wirkung": [
+        "Harntreibend",
+        "Entzündungshemmend",
+        "Blutstillend",
+        "Bindegewebsstärkend"
+      ],
+      "zubereitung": "Kraut: Tee (2 TL, 15-30 Min kochen oder über Nacht kalt ansetzen), durchspülen",
+      "bluete_erntezeit": "Mai bis August (grüne Sommertriebe)",
+      "vorkommen": "Äcker, Wegränder, feuchte Wiesen, Bahndämme",
+      "nebenwirkungen": "Sehr selten Magen-Darm-Beschwerden",
+      "kontraindikationen": "Ödeme bei Herz-/Niereninsuffizienz, Verwechslung mit giftigem Sumpf-Schachtelhalm vermeiden!",
+      "nahrungsmittel": "Nein (nur als Arzneipflanze)",
+      "bild": "images/schachtelhalm.png",
+      "erntemonate": [
+        "Mai",
+        "Juni",
+        "Juli",
+        "August"
+      ]
+    },
+    {
+      "id": 17,
+      "lateinisch": "Calendula officinalis",
+      "deutsch": "Ringelblume",
+      "symptome": [
+        "Wunden",
+        "Hautreizungen",
+        "Entzündungen",
+        "Verbrennungen"
+      ],
+      "wirkung": [
+        "Wundheilend",
+        "Entzündungshemmend",
+        "Antibakteriell",
+        "Durchblutungsfördernd"
+      ],
+      "zubereitung": "Blüten: Tee (1-2 TL, 10 Min ziehen) für Umschläge/Waschungen, innerlich bei Magen-Darm-Beschwerden",
+      "bluete_erntezeit": "Juni bis Oktober",
+      "vorkommen": "Gärten, verwildert auf Brachflächen",
+      "nebenwirkungen": "Selten allergische Reaktionen (Korbblütler)",
+      "kontraindikationen": "Allergie gegen Korbblütler",
+      "nahrungsmittel": "Ja (Blütenblätter als Dekoration, Tee)",
+      "bild": "images/ringelblume.png",
+      "erntemonate": [
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober"
+      ]
+    },
+    {
+      "id": 18,
+      "lateinisch": "Arctium lappa",
+      "deutsch": "Große Klette",
+      "symptome": [
+        "Hautprobleme",
+        "Ekzeme",
+        "Schuppen",
+        "Haarausfall",
+        "Verdauungsbeschwerden"
+      ],
+      "wirkung": [
+        "Blutreinigend",
+        "Hautklärend",
+        "Haarwuchsfördernd",
+        "Antibakteriell"
+      ],
+      "zubereitung": "Wurzel: Tee (1-2 TL, 10-15 Min kochen) oder Kaltauszug, auch äußerlich als Haarspülung",
+      "bluete_erntezeit": "Juli bis September (Wurzeln im Herbst ab 1. Jahr)",
+      "vorkommen": "Wegränder, Schuttplätze, Waldränder, nährstoffreiche Böden",
+      "nebenwirkungen": "Sehr selten allergische Reaktionen (Korbblütler)",
+      "kontraindikationen": "Allergie gegen Korbblütler, Schwangerschaft",
+      "nahrungsmittel": "Ja (junge Wurzeln als Gemüse, junge Stängel)",
+      "bild": "images/klette.png",
+      "erntemonate": [
+        "Juli",
+        "August",
+        "September"
+      ]
+    },
+    {
+      "id": 19,
+      "lateinisch": "Althaea officinalis",
+      "deutsch": "Echter Eibisch",
+      "symptome": [
+        "Husten",
+        "Reizhusten",
+        "Halsschmerzen",
+        "Heiserkeit",
+        "Magen-Darm-Schleimhautentzündungen"
+      ],
+      "wirkung": [
+        "Reizlindernd",
+        "Schleimhautschützend",
+        "Entzündungshemmend",
+        "Hustenstillend"
+      ],
+      "zubereitung": "Wurzel/Blätter: Kaltauszug bevorzugt (1-2 TL, 1-2 Stunden kalt, abseihen, leicht erwärmen) oder Tee (10 Min ziehen)",
+      "bluete_erntezeit": "Juli bis September (Blüten), Wurzeln September-Oktober (2-jährige Pflanzen)",
+      "vorkommen": "Feuchte Wiesen, Ufer, Gräben, salzhaltige Böden, selten wildwachsend",
+      "nebenwirkungen": "Sehr selten, eventuell verzögerte Aufnahme anderer Medikamente durch Schleimfilm",
+      "kontraindikationen": "Keine bekannt, Einnahme zeitlich versetzt zu anderen Medikamenten",
+      "nahrungsmittel": "Ja (historisch Wurzel als Gemüse, junge Blätter)",
+      "bild": "images/eibisch.png",
+      "erntemonate": [
+        "Juli",
+        "August",
+        "September",
+        "Oktober"
+      ]
+    },
+    {
+      "id": 20,
+      "lateinisch": "Malva sylvestris / Malva neglecta",
+      "deutsch": "Wilde Malve / Käsepappel",
+      "symptome": [
+        "Husten",
+        "Reizhusten",
+        "Halsschmerzen",
+        "Heiserkeit",
+        "Magen-Darm-Schleimhautentzündungen"
+      ],
+      "wirkung": [
+        "Reizlindernd",
+        "Schleimhautschützend",
+        "Entzündungshemmend",
+        "Hustenstillend"
+      ],
+      "zubereitung": "Blüten/Blätter: Kaltauszug bevorzugt (1-2 TL, 2-8 Stunden in kaltem Wasser, abseihen, leicht erwärmen) oder Tee (10 Min ziehen)",
+      "bluete_erntezeit": "Juni bis September",
+      "vorkommen": "Wegränder, Schuttplätze, Gärten, Mauern, warme Standorte",
+      "nebenwirkungen": "Sehr selten, eventuell verzögerte Aufnahme anderer Medikamente durch Schleimfilm",
+      "kontraindikationen": "Keine bekannt, Einnahme zeitlich versetzt zu anderen Medikamenten",
+      "nahrungsmittel": "Ja (Blätter, Blüten, unreife Früchte/'Käsle')",
+      "bild": "images/malve.png",
+      "erntemonate": [
+        "Juni",
+        "Juli",
+        "August",
+        "September"
+      ]
+    }
+  ]
+}
