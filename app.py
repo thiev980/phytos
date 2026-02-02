@@ -247,21 +247,18 @@ def zeige_pflanze(pflanze, show_details=False):
     col1, col2 = st.columns([1, 2])
     
     with col1:
-        image_extensions = ['.webp', '.jpg', '.jpeg', '.png', '.WEBP', '.JPG', '.JPEG', '.PNG']
-        image_found = False
-        
-        for ext in image_extensions:
-            image_path = f"images/{pflanze['deutsch'].lower()}{ext}"
+        # Verwende bild-Pfad aus JSON statt deutschen Namen
+        if 'bild' in pflanze and pflanze['bild']:
+            image_path = pflanze['bild']
             if os.path.exists(image_path):
                 try:
                     img = Image.open(image_path)
                     st.image(img, use_column_width=True, caption=pflanze['deutsch'])
-                    image_found = True
-                    break
                 except Exception as e:
-                    continue
-        
-        if not image_found:
+                    st.info("📷 Bild nicht verfügbar")
+            else:
+                st.info("📷 Bild nicht verfügbar")
+        else:
             st.info("📷 Bild nicht verfügbar")
     
     with col2:
@@ -576,21 +573,18 @@ with tab6:
                             col_a, col_b = st.columns([1, 2])
                             
                             with col_a:
-                                image_extensions = ['.webp', '.jpg', '.jpeg', '.png', '.WEBP', '.JPG', '.JPEG', '.PNG']
-                                image_found = False
-                                
-                                for ext in image_extensions:
-                                    image_path = f"images/{matched_plant['deutsch'].lower()}{ext}"
+                                # Verwende bild-Pfad aus JSON
+                                if 'bild' in matched_plant and matched_plant['bild']:
+                                    image_path = matched_plant['bild']
                                     if os.path.exists(image_path):
                                         try:
                                             img = Image.open(image_path)
                                             st.image(img, use_column_width=True, caption=matched_plant['deutsch'])
-                                            image_found = True
-                                            break
                                         except Exception as e:
-                                            continue
-                                
-                                if not image_found:
+                                            st.info("📷 Bild nicht verfügbar")
+                                    else:
+                                        st.info("📷 Bild nicht verfügbar")
+                                else:
                                     st.info("📷 Bild nicht verfügbar")
                             
                             with col_b:
