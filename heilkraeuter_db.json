@@ -605,6 +605,195 @@
         "August",
         "September"
       ]
+    },
+    {
+      "id": 21,
+      "lateinisch": "Allium ursinum",
+      "deutsch": "Bärlauch",
+      "symptome": [
+        "Verdauungsbeschwerden",
+        "Bluthochdruck",
+        "Arteriosklerose",
+        "Appetitlosigkeit"
+      ],
+      "wirkung": [
+        "Verdauungsfördernd",
+        "Blutdrucksenkend",
+        "Durchblutungsfördernd",
+        "Antibakteriell"
+      ],
+      "zubereitung": "Frische Blätter: roh im Salat, als Pesto, in Suppen (nicht kochen, nur kurz erhitzen)",
+      "bluete_erntezeit": "März bis Mai",
+      "vorkommen": "Feuchte Laubwälder, Auwälder, schattige Standorte, oft in großen Beständen",
+      "nebenwirkungen": "Bei empfindlichen Personen Magen-Darm-Reizung, Verwechslungsgefahr mit giftigen Maiglöckchen/Herbstzeitlosen!",
+      "kontraindikationen": "Magen-Darm-Geschwüre, akute Nieren-/Harnwegsentzündungen",
+      "nahrungsmittel": "Ja (Blätter, Blüten, Zwiebeln - wichtiges Wildgemüse)",
+      "bild": "images/baerlauch.png",
+      "erntemonate": [
+        "März",
+        "April",
+        "Mai"
+      ]
+    },
+    {
+      "id": 22,
+      "lateinisch": "Rosa canina",
+      "deutsch": "Hagebutte / Heckenrose",
+      "symptome": [
+        "Erkältungen",
+        "Vitamin-C-Mangel",
+        "Blasen- und Nierenleiden",
+        "Immunschwäche"
+      ],
+      "wirkung": [
+        "Immunstärkend",
+        "Harntreibend",
+        "Entzündungshemmend",
+        "Antioxidativ"
+      ],
+      "zubereitung": "Früchte: Tee (1-2 TL getrocknete Schalen, 10-15 Min ziehen), Mus, Marmelade (Kerne entfernen - reizen!)",
+      "bluete_erntezeit": "September bis November (nach erstem Frost süßer)",
+      "vorkommen": "Waldränder, Hecken, Gebüsche, Böschungen, weit verbreitet",
+      "nebenwirkungen": "Kerne/Härchen können Haut und Schleimhäute reizen (daher entfernen)",
+      "kontraindikationen": "Keine bekannt",
+      "nahrungsmittel": "Ja (Früchte als Marmelade, Tee, Mus - sehr Vitamin-C-reich)",
+      "bild": "images/hagebutte.png",
+      "erntemonate": [
+        "September",
+        "Oktober",
+        "November"
+      ]
+    },
+    {
+      "id": 23,
+      "lateinisch": "Glechoma hederacea",
+      "deutsch": "Gundermann / Gundelrebe",
+      "symptome": [
+        "Husten",
+        "Bronchitis",
+        "Blasenentzündung",
+        "Wunden",
+        "Verdauungsbeschwerden"
+      ],
+      "wirkung": [
+        "Schleimlösend",
+        "Entzündungshemmend",
+        "Wundheilend",
+        "Verdauungsfördernd"
+      ],
+      "zubereitung": "Blätter/Blüten: Tee (1 TL, 10 Min ziehen), frisch in Salaten, äußerlich als Umschlag",
+      "bluete_erntezeit": "März bis Juni",
+      "vorkommen": "Wiesen, Gärten, Wegränder, Waldränder, feuchte Standorte",
+      "nebenwirkungen": "In großen Mengen leicht giftig für Pferde (für Menschen in üblichen Mengen unbedenklich)",
+      "kontraindikationen": "Schwangerschaft (enthält Pulegon)",
+      "nahrungsmittel": "Ja (Blätter als Würzkraut, Salat, Smoothie - würzig-aromatisch)",
+      "bild": "images/gundermann.png",
+      "erntemonate": [
+        "März",
+        "April",
+        "Mai",
+        "Juni"
+      ]
+    },
+    {
+      "id": 24,
+      "lateinisch": "Alchemilla vulgaris",
+      "deutsch": "Frauenmantel",
+      "symptome": [
+        "Menstruationsbeschwerden",
+        "Wechseljahresbeschwerden",
+        "Durchfall",
+        "Wunden"
+      ],
+      "wirkung": [
+        "Adstringierend",
+        "Entzündungshemmend",
+        "Krampflösend",
+        "Hormonregulierend"
+      ],
+      "zubereitung": "Blätter: Tee (2 TL, 10 Min ziehen), 2-3x täglich, äußerlich als Umschlag oder Sitzbad",
+      "bluete_erntezeit": "Mai bis September",
+      "vorkommen": "Wiesen, Waldränder, Wegränder, feuchte Standorte",
+      "nebenwirkungen": "Sehr selten, bei empfindlichen Personen Magen-Darm-Beschwerden",
+      "kontraindikationen": "Keine bekannt",
+      "nahrungsmittel": "Ja (junge Blätter in Salaten, Tee)",
+      "bild": "images/frauenmantel.png",
+      "erntemonate": [
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September"
+      ]
+    },
+    {
+      "id": 25,
+      "lateinisch": "Symphytum officinale",
+      "deutsch": "Echter Beinwell",
+      "symptome": [
+        "Prellungen",
+        "Verstauchungen",
+        "Zerrungen",
+        "Gelenkschmerzen",
+        "schlecht heilende Wunden"
+      ],
+      "wirkung": [
+        "Wundheilungsfördernd",
+        "Entzündungshemmend",
+        "Schmerzlindernd",
+        "Regenerationsfördernd"
+      ],
+      "zubereitung": "Wurzel/Blätter: NUR ÄUSSERLICH als Umschlag, Salbe, Breiumschlag (frische zerquetschte Blätter)",
+      "bluete_erntezeit": "Mai bis September (Blätter), Wurzeln März-April oder Oktober-November",
+      "vorkommen": "Feuchte Wiesen, Gräben, Bachläufe, Auwälder",
+      "nebenwirkungen": "Enthält leberschädigende Pyrrolizidinalkaloide - NICHT innerlich anwenden!",
+      "kontraindikationen": "Keine innerliche Anwendung, nicht auf offene Wunden, nicht in Schwangerschaft/Stillzeit",
+      "nahrungsmittel": "Nein (früher als Gemüse, heute wegen Pyrrolizidinalkaloiden nicht mehr empfohlen)",
+      "bild": "images/beinwell.png",
+      "erntemonate": [
+        "März",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November"
+      ]
+    },
+    {
+      "id": 26,
+      "lateinisch": "Plantago major",
+      "deutsch": "Breitwegerich",
+      "symptome": [
+        "Husten",
+        "Bronchitis",
+        "Halsschmerzen",
+        "Insektenstiche",
+        "Wunden"
+      ],
+      "wirkung": [
+        "Schleimlösend",
+        "Hustenstillend",
+        "Antibakteriell",
+        "Wundheilend",
+        "Entzündungshemmend"
+      ],
+      "zubereitung": "Blätter: Tee (2 TL, 10 Min ziehen) oder frische Blätter zerquetscht auf Insektenstiche/Wunden",
+      "bluete_erntezeit": "Mai bis September",
+      "vorkommen": "Wegränder, Weiden, Rasenflächen, Trittfluren (liebt verdichtete Böden)",
+      "nebenwirkungen": "Sehr selten allergische Reaktionen",
+      "kontraindikationen": "Keine bekannt",
+      "nahrungsmittel": "Ja (junge Blätter als Salat/Gemüse, Samen)",
+      "bild": "images/breitwegerich.png",
+      "erntemonate": [
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September"
+      ]
     }
   ]
 }
