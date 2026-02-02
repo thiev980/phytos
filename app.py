@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import json
 import os
 from PIL import Image
@@ -74,10 +75,10 @@ st.markdown("""
 # Füge deine Domain ein nach dem Setup
 PLAUSIBLE_DOMAIN = "phytos.streamlit.app"
 
-# Plausible Analytics Script
-st.markdown(f"""
+# Plausible Analytics Script (richtig eingebunden für Streamlit)
+components.html(f"""
 <script defer data-domain="{PLAUSIBLE_DOMAIN}" src="https://plausible.io/js/script.js"></script>
-""", unsafe_allow_html=True)
+""", height=0)
 
 # Custom CSS für besseres Design + SEO
 st.markdown("""
@@ -624,7 +625,7 @@ with tab7:
     st.markdown("""
     **Für Admins:** Das vollständige Analytics-Dashboard ist verfügbar unter:
     
-    👉 **[Plausible Dashboard öffnen](https://plausible.io/pythos.streamlit.app)**
+    👉 **[Plausible Dashboard öffnen](https://plausible.io/your-app.streamlit.app)**
     
     *(Login erforderlich - nur für Seitenbetreiber sichtbar)*
     """)
