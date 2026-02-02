@@ -39,7 +39,7 @@ st.markdown("""
 <meta property="og:title" content="Heilkräuter Schweiz - Wissenschaftliche Heilpflanzen-Datenbank">
 <meta property="og:description" content="Über 26 wissenschaftlich belegte Heilpflanzen mit Anwendung, Wirkung und Zubereitung. Inklusive KI-Pflanzenerkennung.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://phytos.streamlit.app/app/static/heilkraeuter-og.png">
+<meta property="og:image" content="https://your-app-url.streamlit.app/app/static/heilkraeuter-og.png">
 
 <!-- Schema.org Structured Data for Google -->
 <script type="application/ld+json">
@@ -79,6 +79,27 @@ PLAUSIBLE_DOMAIN = "phytos.streamlit.app"
 components.html(f"""
 <script defer data-domain="{PLAUSIBLE_DOMAIN}" src="https://plausible.io/js/script.js"></script>
 """, height=0)
+
+# Custom Event Tracking für Plausible
+def track_plausible_event(event_name, props=None):
+    """Track custom events in Plausible Analytics"""
+    if props:
+        props_json = json.dumps(props).replace('"', '\\"')
+        components.html(f"""
+        <script>
+        if (window.plausible) {{
+            window.plausible('{event_name}', {{props: {props_json}}});
+        }}
+        </script>
+        """, height=0)
+    else:
+        components.html(f"""
+        <script>
+        if (window.plausible) {{
+            window.plausible('{event_name}');
+        }}
+        </script>
+        """, height=0)
 
 # Custom CSS für besseres Design + SEO
 st.markdown("""
@@ -269,13 +290,13 @@ st.markdown('<div class="main-header">🌿 Europäische Heilkräuter-Datenbank</
 st.markdown('<div class="subtitle">Wissenschaftlich belegte Heilpflanzen für die einfache Anwendung</div>', unsafe_allow_html=True)
 
 # SEO-optimierter Intro-Text (kollabierbar)
-with st.expander("ℹ️ Über diese Datenbank - hier lesen für mehr Informationen"):
+with st.expander("ℹ️ Über diese Datenbank - Jetzt lesen!"):
     st.markdown("""
     <div class="seo-text">
     <h3>🌿 Heilkräuter aus der Schweiz und Europa – Wissenschaftlich fundiert</h3>
     
-    Willkommen in der **wissenschaftlich fundierten Heilpflanzen-Datenbank mit integrierter KI-Pflanzenerkennung**. 
-    Entdecke über **sorgfältig recherchierte Heilkräuter** mit praktischen Anwendungen, 
+    Willkommen in der **wissenschaftlich fundierten Heilpflanzen-Datenbank mit integrierter KI-Pflanzenerkennung**! 
+    Entdecke über **26 sorgfältig recherchierte Heilkräuter** mit praktischen Anwendungen, 
     die du zu Hause selbst umsetzen kannst.
     
     <h4>Was du hier findest:</h4>
@@ -289,7 +310,7 @@ with st.expander("ℹ️ Über diese Datenbank - hier lesen für mehr Informatio
     ✅ **Sicherheit zuerst**: Detaillierte Informationen zu Nebenwirkungen, Kontraindikationen 
     und korrekter Dosierung
     
-    ✅ **KI-Pflanzenerkennung**: Lade ein Foto hoch und lass die Pflanze automatisch 
+    ✅ **KI-Pflanzenerkennung**: Lade ein Foto hoch und lasse die Pflanze automatisch 
     identifizieren (powered by Pl@ntNet)
     
     ✅ **Saisonale Suche**: Finde heraus, welche Heilkräuter gerade Saison haben
@@ -325,14 +346,13 @@ with st.expander("ℹ️ Über diese Datenbank - hier lesen für mehr Informatio
 st.markdown("---")
 
 # Tabs für verschiedene Suchoptionen
-tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "🔍 Nach Symptom suchen",
     "💊 Nach Wirkung suchen", 
     "🌿 Nach Pflanze suchen",
     "📅 Nach Erntezeit suchen",
     "📚 Alle Pflanzen",
-    "📸 Pflanze erkennen",
-    "📊 Nutzungsstatistik"
+    "📸 Pflanze erkennen"
 ])
 
 # Tab 1: Suche nach Symptom
@@ -347,6 +367,9 @@ with tab1:
     )
     
     if symptom != "---":
+        # Track custom event
+        track_plausible_event("Symptom Search", {"symptom": symptom})
+        
         ergebnisse = suche_nach_symptom(symptom)
         if ergebnisse:
             st.success(f"**{len(ergebnisse)} Pflanze(n) gefunden für '{symptom}':**")
@@ -369,6 +392,9 @@ with tab2:
     )
     
     if wirkung != "---":
+        # Track custom event
+        track_plausible_event("Wirkung Search", {"wirkung": wirkung})
+        
         ergebnisse = suche_nach_wirkung(wirkung)
         if ergebnisse:
             st.success(f"**{len(ergebnisse)} Pflanze(n) gefunden mit Wirkung '{wirkung}':**")
@@ -391,6 +417,9 @@ with tab3:
     )
     
     if pflanze_name != "---":
+        # Track custom event
+        track_plausible_event("Plant View", {"plant": pflanze_name})
+        
         pflanze = suche_pflanze(pflanze_name)
         if pflanze:
             zeige_pflanze(pflanze, show_details=True)
@@ -410,6 +439,9 @@ with tab4:
         index=monate.index(aktueller_monat),
         key="monat_select"
     )
+    
+    # Track custom event
+    track_plausible_event("Harvest Search", {"month": monat})
     
     ergebnisse = suche_nach_erntezeit(monat)
     
@@ -499,6 +531,9 @@ with tab6:
     )
     
     if uploaded_file is not None:
+        # Track image upload event
+        track_plausible_event("Image Upload", {"feature": "plant_recognition"})
+        
         col1, col2 = st.columns([1, 1])
         
         with col1:
@@ -586,68 +621,6 @@ with tab6:
                 st.warning("⚠️ Keine Pflanzen erkannt. Versuche ein anderes Foto.")
             else:
                 st.error("❌ Fehler bei der Identifikation. Bitte versuche es erneut.")
-
-# Tab 7: Analytics Dashboard (NEU - Plausible)
-with tab7:
-    st.header("📊 Nutzungsstatistik")
-    st.markdown("*Übersicht über alle Besucher dieser Datenbank (aggregiert)*")
-    
-    st.info("""
-    **Diese App nutzt Plausible Analytics** - eine privacy-freundliche, DSGVO-konforme 
-    Analytics-Lösung ohne Cookies und ohne persönliches Tracking.
-    """)
-    
-    st.markdown("---")
-    
-    st.markdown("""
-    ### 📈 Was wird getrackt?
-    
-    - **Seitenaufrufe:** Wie oft wird die App besucht?
-    - **Eindeutige Besucher:** Wie viele verschiedene Personen nutzen die App?
-    - **Beliebteste Seiten:** Welche Tabs werden am häufigsten verwendet?
-    - **Verweisquellen:** Woher kommen die Besucher?
-    - **Geräte:** Desktop vs. Mobile
-    - **Länder:** Geografische Verteilung
-    
-    ### 🔒 Privacy & DSGVO
-    
-    ✅ Keine Cookies  
-    ✅ Keine personenbezogenen Daten  
-    ✅ Kein Cross-Site-Tracking  
-    ✅ DSGVO-konform ohne Cookie-Banner  
-    ✅ Daten werden in der EU gespeichert
-    """)
-    
-    st.markdown("---")
-    
-    st.markdown("### 🎯 Dashboard aufrufen")
-    
-    st.markdown("""
-    **Für Admins:** Das vollständige Analytics-Dashboard ist verfügbar unter:
-    
-    👉 **[Plausible Dashboard öffnen](https://plausible.io/phytos.streamlit.app)**
-    
-    *(Login erforderlich - nur für Seitenbetreiber sichtbar)*
-    """)
-    
-    st.markdown("---")
-    
-    st.markdown("""
-    ### 💡 Setup-Anleitung (für Admins)
-    
-    1. **Account erstellen:** [plausible.io](https://plausible.io) (€9/Monat)
-    2. **Website hinzufügen:** Deine Streamlit-Domain eingeben
-    3. **Domain in app.py eintragen:**
-       ```python
-       PLAUSIBLE_DOMAIN = "your-app.streamlit.app"
-       ```
-    4. **Warten:** Nach 24h erste Daten sichtbar
-    5. **Dashboard teilen:** Öffentlichen Link erstellen (optional)
-    
-    **Alternative:** Self-hosted Plausible (kostenlos, aber Server nötig)
-    """)
-    
-    st.caption("💡 Diese Statistiken sind für alle Besucher einsehbar, wenn ein öffentlicher Dashboard-Link erstellt wird.")
 
 # Footer mit SEO-Content
 st.markdown("---")
