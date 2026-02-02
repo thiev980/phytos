@@ -1,136 +1,216 @@
 import streamlit as st
 import json
-from pathlib import Path
-from PIL import Image
 import os
+from PIL import Image
+import requests
+import base64
+from io import BytesIO
 
 # Seitenkonfiguration
 st.set_page_config(
-    page_title="Europäische Heilkräuter",
+    page_title="Europäische Heilkräuter-Datenbank",
     page_icon="🌿",
     layout="wide"
 )
 
+# Custom CSS für besseres Design
+st.markdown("""
+<style>
+    .main-header {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #2e7d32;
+    }
+    .subtitle {
+        font-size: 1.2rem;
+        color: #666;
+        font-style: italic;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # Daten laden
 @st.cache_data
-def load_data():
+def lade_pflanzen():
     with open('heilkraeuter_db.json', 'r', encoding='utf-8') as f:
-        return json.load(f)
+        data = json.load(f)
+        # Extrahiere das pflanzen Array aus der JSON-Struktur
+        return data['pflanzen'] if 'pflanzen' in data else data
 
-data = load_data()
-pflanzen = data['pflanzen']
+pflanzen = lade_pflanzen()
 
-# Hilfsfunktionen
+# Hilfsfunktionen für Suche
 def get_alle_symptome():
-    """Extrahiert alle einzigartigen Symptome aus der Datenbank"""
     symptome = set()
     for pflanze in pflanzen:
         symptome.update(pflanze['symptome'])
     return sorted(list(symptome))
 
 def get_alle_wirkungen():
-    """Extrahiert alle einzigartigen Wirkungen aus der Datenbank"""
     wirkungen = set()
     for pflanze in pflanzen:
+        # Deine JSON verwendet 'wirkung' statt 'wirkungen'
         wirkungen.update(pflanze['wirkung'])
     return sorted(list(wirkungen))
 
 def get_alle_pflanzennamen():
-    """Extrahiert alle Pflanzennamen (Deutsch)"""
     return sorted([p['deutsch'] for p in pflanzen])
 
-def get_monate():
-    """Gibt eine Liste aller Monate zurück"""
-    return [
-        "Januar", "Februar", "März", "April", "Mai", "Juni",
-        "Juli", "August", "September", "Oktober", "November", "Dezember"
-    ]
-
-def suche_nach_monat(monat):
-    """Findet alle Pflanzen, die in einem bestimmten Monat geerntet werden können"""
-    return [p for p in pflanzen if monat in p.get('erntemonate', [])]
-
 def suche_nach_symptom(symptom):
-    """Findet alle Pflanzen, die ein bestimmtes Symptom behandeln"""
     return [p for p in pflanzen if symptom in p['symptome']]
 
 def suche_nach_wirkung(wirkung):
-    """Findet alle Pflanzen mit einer bestimmten Wirkung"""
     return [p for p in pflanzen if wirkung in p['wirkung']]
 
 def suche_pflanze(name):
-    """Findet eine Pflanze nach deutschem Namen"""
-    return next((p for p in pflanzen if p['deutsch'] == name), None)
+    for p in pflanzen:
+        if p['deutsch'].lower() == name.lower():
+            return p
+    return None
 
-def zeige_pflanze(pflanze, show_details=True):
-    """Zeigt Details einer Pflanze an"""
+def suche_nach_lateinischem_namen(latin_name):
+    """Sucht Pflanze nach lateinischem Namen (case-insensitive, flexibel)"""
+    latin_name = latin_name.lower().strip()
+    
+    for p in pflanzen:
+        pflanze_latin = p['lateinisch'].lower()
+        
+        # Exakte Übereinstimmung
+        if pflanze_latin == latin_name:
+            return p
+        
+        # Übereinstimmung ohne Autor-Namen (z.B. "Thymus vulgaris L." → "Thymus vulgaris")
+        if pflanze_latin.split()[0:2] == latin_name.split()[0:2]:
+            return p
+            
+        # Nur Gattungsname (z.B. "Thymus" matched "Thymus vulgaris")
+        if pflanze_latin.startswith(latin_name.split()[0]):
+            return p
+    
+    return None
+
+def suche_nach_erntezeit(monat):
+    """Sucht alle Pflanzen, die in einem bestimmten Monat geerntet werden können"""
+    return [p for p in pflanzen if monat in p.get('erntemonate', [])]
+
+# Pl@ntNet API Integration
+def identify_plant_with_plantnet(image_file, api_key):
+    """
+    Identifiziert eine Pflanze mit der Pl@ntNet API
+    
+    Args:
+        image_file: Uploaded file object from Streamlit
+        api_key: Pl@ntNet API key
+    
+    Returns:
+        dict mit results oder None bei Fehler
+    """
+    try:
+        # API Endpoint
+        url = "https://my-api.plantnet.org/v2/identify/all"
+        
+        # Bild laden und konvertieren
+        image = Image.open(image_file)
+        
+        # Falls RGBA (mit Transparenz), konvertiere zu RGB
+        if image.mode == 'RGBA':
+            # Erstelle weißen Hintergrund
+            background = Image.new('RGB', image.size, (255, 255, 255))
+            background.paste(image, mask=image.split()[3])  # 3 ist der Alpha-Kanal
+            image = background
+        elif image.mode != 'RGB':
+            image = image.convert('RGB')
+        
+        # Bild in Bytes konvertieren
+        buffered = BytesIO()
+        image.save(buffered, format="JPEG", quality=85)
+        buffered.seek(0)
+        
+        # Request Parameter
+        params = {
+            'api-key': api_key,
+        }
+        
+        # Files und Data für multipart/form-data
+        files = [
+            ('images', ('plant.jpg', buffered, 'image/jpeg'))
+        ]
+        
+        data = {
+            'organs': ['auto']  # 'auto' lässt API das Organ erkennen
+        }
+        
+        # API Request
+        response = requests.post(url, params=params, files=files, data=data)
+        
+        if response.status_code == 200:
+            return response.json()
+        else:
+            st.error(f"API Fehler: {response.status_code} - {response.text}")
+            return None
+            
+    except Exception as e:
+        st.error(f"Fehler bei der Pflanzenerkennung: {str(e)}")
+        return None
+
+def zeige_pflanze(pflanze, show_details=False):
+    """Zeigt eine Pflanze mit allen Details an"""
+    
     col1, col2 = st.columns([1, 2])
     
     with col1:
-        # Bild anzeigen - einfach direkt laden
-        bild_pfad = pflanze['bild']
+        # Bild laden - unterstützt mehrere Formate
+        image_extensions = ['.webp', '.jpg', '.jpeg', '.png', '.WEBP', '.JPG', '.JPEG', '.PNG']
+        image_found = False
         
-        # Versuche das Bild zu laden
-        if os.path.exists(bild_pfad):
-            try:
-                img = Image.open(bild_pfad)
-                st.image(img, caption=pflanze['deutsch'], use_column_width=True)
-            except Exception as e:
-                st.error(f"Fehler beim Laden: {e}")
-        else:
-            st.info(f"📷 Bild noch nicht vorhanden:\n`{bild_pfad}`")
+        for ext in image_extensions:
+            image_path = f"images/{pflanze['deutsch'].lower()}{ext}"
+            if os.path.exists(image_path):
+                try:
+                    img = Image.open(image_path)
+                    st.image(img, use_column_width=True, caption=pflanze['deutsch'])
+                    image_found = True
+                    break
+                except Exception as e:
+                    continue
+        
+        if not image_found:
+            st.info("📷 Bild nicht verfügbar")
     
     with col2:
-        st.subheader(f"{pflanze['deutsch']}")
-        st.caption(f"*{pflanze['lateinisch']}*")
+        st.subheader(f"🌿 {pflanze['deutsch']}")
+        st.markdown(f"*{pflanze['lateinisch']}*")
+        st.markdown(f"**🩺 Symptome:** {', '.join(pflanze['symptome'])}")
+        st.markdown(f"**💊 Wirkungen:** {', '.join(pflanze['wirkung'])}")
         
-        st.markdown("**🎯 Symptome:**")
-        st.write(", ".join(pflanze['symptome']))
-        
-        st.markdown("**💊 Wirkung:**")
-        st.write(", ".join(pflanze['wirkung']))
-        
-        st.markdown("**☕ Zubereitung:**")
-        st.write(pflanze['zubereitung'])
-    
-    # Weitere Details - nur wenn show_details=True
-    if show_details:
-        st.markdown("---")
-        st.markdown("### 📋 Weitere Details")
-        
-        col3, col4 = st.columns(2)
-        
-        with col3:
-            st.markdown("**🌸 Blüte/Erntezeit:**")
-            st.write(pflanze['bluete_erntezeit'])
-            if 'erntemonate' in pflanze and pflanze['erntemonate']:
-                st.caption(f"Erntemonate: {', '.join(pflanze['erntemonate'])}")
+        if show_details:
+            with st.expander("📋 Anwendung & Zubereitung"):
+                st.markdown(f"**Zubereitung:** {pflanze['zubereitung']}")
             
-            st.markdown("**📍 Vorkommen:**")
-            st.write(pflanze['vorkommen'])
+            with st.expander("🌸 Erntezeit & Vorkommen"):
+                st.markdown(f"**Blüte/Erntezeit:** {pflanze['bluete_erntezeit']}")
+                if 'erntemonate' in pflanze:
+                    st.markdown(f"**Erntemonate:** {', '.join(pflanze['erntemonate'])}")
+                st.markdown(f"**Vorkommen:** {pflanze['vorkommen']}")
+                st.markdown(f"**Als Nahrungsmittel:** {pflanze['nahrungsmittel']}")
             
-            st.markdown("**🍴 Als Nahrungsmittel:**")
-            st.write(pflanze['nahrungsmittel'])
-        
-        with col4:
-            st.markdown("**⚠️ Nebenwirkungen:**")
-            st.write(pflanze['nebenwirkungen'])
-            
-            st.markdown("**🚫 Kontraindikationen:**")
-            st.write(pflanze['kontraindikationen'])
+            with st.expander("⚠️ Sicherheitshinweise"):
+                st.markdown(f"**Nebenwirkungen:** {pflanze['nebenwirkungen']}")
+                st.markdown(f"**Kontraindikationen:** {pflanze['kontraindikationen']}")
 
-# Haupttitel
-st.title("🌿 Europäische Heilkräuter-Datenbank")
-st.markdown("*Wissenschaftlich belegte Heilpflanzen für die einfache Anwendung*")
+# Header
+st.markdown('<div class="main-header">🌿 Europäische Heilkräuter-Datenbank</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">Wissenschaftlich belegte Heilpflanzen für die einfache Anwendung</div>', unsafe_allow_html=True)
 st.markdown("---")
 
 # Tabs für verschiedene Suchoptionen
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "🔍 Nach Symptom suchen",
     "💊 Nach Wirkung suchen", 
-    "🌱 Nach Pflanze suchen",
+    "🌿 Nach Pflanze suchen",
     "📅 Nach Erntezeit suchen",
-    "📚 Alle Pflanzen"
+    "📚 Alle Pflanzen",
+    "📸 Pflanze erkennen"
 ])
 
 # Tab 1: Suche nach Symptom
@@ -145,11 +225,14 @@ with tab1:
     
     if symptom != "---":
         ergebnisse = suche_nach_symptom(symptom)
-        st.success(f"**{len(ergebnisse)} Pflanze(n) gefunden für '{symptom}':**")
-        
-        for pflanze in ergebnisse:
-            st.markdown("---")
-            zeige_pflanze(pflanze, show_details=True)
+        if ergebnisse:
+            st.success(f"**{len(ergebnisse)} Pflanze(n) gefunden für '{symptom}':**")
+            
+            for pflanze in ergebnisse:
+                st.markdown("---")
+                zeige_pflanze(pflanze, show_details=True)
+        else:
+            st.warning("Keine Pflanzen gefunden.")
 
 # Tab 2: Suche nach Wirkung
 with tab2:
@@ -163,11 +246,14 @@ with tab2:
     
     if wirkung != "---":
         ergebnisse = suche_nach_wirkung(wirkung)
-        st.success(f"**{len(ergebnisse)} Pflanze(n) gefunden mit Wirkung '{wirkung}':**")
-        
-        for pflanze in ergebnisse:
-            st.markdown("---")
-            zeige_pflanze(pflanze, show_details=True)
+        if ergebnisse:
+            st.success(f"**{len(ergebnisse)} Pflanze(n) gefunden mit Wirkung '{wirkung}':**")
+            
+            for pflanze in ergebnisse:
+                st.markdown("---")
+                zeige_pflanze(pflanze, show_details=True)
+        else:
+            st.warning("Keine Pflanzen gefunden.")
 
 # Tab 3: Suche nach Pflanze
 with tab3:
@@ -184,80 +270,208 @@ with tab3:
         if pflanze:
             zeige_pflanze(pflanze, show_details=True)
 
-# Tab 4: Suche nach Erntezeit/Monat
+# Tab 4: Suche nach Erntezeit
 with tab4:
     st.header("Suche nach Erntezeit")
     
-    # Aktuellen Monat ermitteln (Default)
-    from datetime import datetime
-    aktuelle_monatszahl = datetime.now().month
-    monate = get_monate()
-    aktueller_monat = monate[aktuelle_monatszahl - 1]
-    
-    # Finde Index des aktuellen Monats in der Liste (mit "---" am Anfang)
-    default_index = aktuelle_monatszahl  # +1 wegen "---" am Anfang, -1 für 0-basiert = 0
+    # Aktueller Monat als Default
+    import datetime
+    monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", 
+              "Juli", "August", "September", "Oktober", "November", "Dezember"]
+    aktueller_monat = monate[datetime.datetime.now().month - 1]
     
     monat = st.selectbox(
         "Wähle einen Monat:",
-        options=["---"] + monate,
-        index=default_index,  # Aktueller Monat vorausgewählt
+        options=monate,
+        index=monate.index(aktueller_monat),
         key="monat_select"
     )
     
-    if monat != "---":
-        ergebnisse = suche_nach_monat(monat)
-        st.success(f"**{len(ergebnisse)} Pflanze(n) können im {monat} geerntet werden:**")
-        
-        if len(ergebnisse) == 0:
-            st.info("Keine Pflanzen in diesem Monat verfügbar.")
-        else:
-            for pflanze in ergebnisse:
-                st.markdown("---")
-                zeige_pflanze(pflanze, show_details=True)
+    ergebnisse = suche_nach_erntezeit(monat)
+    
+    if ergebnisse:
+        st.success(f"**{len(ergebnisse)} Pflanze(n) im {monat} verfügbar:**")
+        for pflanze in ergebnisse:
+            st.markdown("---")
+            zeige_pflanze(pflanze, show_details=True)
+    else:
+        st.info(f"Keine Pflanzen für {monat} in der Datenbank.")
 
 # Tab 5: Alle Pflanzen
 with tab5:
     st.header("Alle Pflanzen (Übersicht)")
     
-    # Kompakte Tabelle mit Expander für jede Pflanze
     for pflanze in pflanzen:
         with st.expander(f"🌿 {pflanze['deutsch']} (*{pflanze['lateinisch']}*)"):
-            # Zeige Pflanze ohne zusätzliche Detail-Section (show_details=False würde reichen, aber wir zeigen direkt alles)
-            col1, col2 = st.columns([1, 2])
-            
-            with col1:
-                # Bild anzeigen - einfach direkt laden
-                bild_pfad = pflanze['bild']
-                
-                if os.path.exists(bild_pfad):
-                    try:
-                        img = Image.open(bild_pfad)
-                        st.image(img, caption=pflanze['deutsch'], use_column_width=True)
-                    except Exception as e:
-                        st.error(f"Fehler beim Laden: {e}")
-                else:
-                    st.info(f"📷 Bild noch nicht vorhanden")
-            
-            with col2:
-                st.markdown(f"**Lateinisch:** *{pflanze['lateinisch']}*")
-                st.markdown(f"**🎯 Symptome:** {', '.join(pflanze['symptome'])}")
-                st.markdown(f"**💊 Wirkung:** {', '.join(pflanze['wirkung'])}")
-                st.markdown(f"**☕ Zubereitung:** {pflanze['zubereitung']}")
-            
-            # Weitere Details direkt anzeigen
+            # Details direkt anzeigen
             st.markdown("---")
             col3, col4 = st.columns(2)
             
             with col3:
+                st.markdown(f"**🩺 Symptome:** {', '.join(pflanze['symptome'])}")
+                st.markdown(f"**💊 Wirkungen:** {', '.join(pflanze['wirkung'])}")
+                st.markdown(f"**📋 Zubereitung:** {pflanze['zubereitung']}")
+            
+            with col4:
                 st.markdown(f"**🌸 Blüte/Erntezeit:** {pflanze['bluete_erntezeit']}")
-                if 'erntemonate' in pflanze and pflanze['erntemonate']:
-                    st.caption(f"Erntemonate: {', '.join(pflanze['erntemonate'])}")
+                if 'erntemonate' in pflanze:
+                    st.markdown(f"**📅 Erntemonate:** {', '.join(pflanze['erntemonate'])}")
                 st.markdown(f"**📍 Vorkommen:** {pflanze['vorkommen']}")
                 st.markdown(f"**🍴 Als Nahrungsmittel:** {pflanze['nahrungsmittel']}")
             
-            with col4:
-                st.markdown(f"**⚠️ Nebenwirkungen:** {pflanze['nebenwirkungen']}")
-                st.markdown(f"**🚫 Kontraindikationen:** {pflanze['kontraindikationen']}")
+            st.markdown("---")
+            st.markdown(f"**⚠️ Nebenwirkungen:** {pflanze['nebenwirkungen']}")
+            st.markdown(f"**🚫 Kontraindikationen:** {pflanze['kontraindikationen']}")
+
+# Tab 6: Pflanze erkennen (NEU)
+with tab6:
+    st.header("📸 Pflanze erkennen")
+    st.markdown("""
+    Lade ein Foto einer Pflanze hoch und die App versucht, sie zu identifizieren.
+    
+    **Tipps für bessere Ergebnisse:**
+    - 📸 Fotografiere Blätter, Blüten oder Früchte deutlich
+    - ☀️ Gutes Licht verwenden
+    - 🎯 Pflanze sollte im Fokus sein
+    - 🌿 Mehrere Pflanzenteile auf einem Foto sind hilfreich
+    """)
+    
+    # API Key Management
+    st.markdown("---")
+    
+    # Versuche API Key aus Streamlit Secrets zu laden
+    try:
+        api_key = st.secrets["PLANTNET_API_KEY"]
+        st.success("✅ API Key geladen - bereit zur Pflanzenerkennung!")
+    except (KeyError, FileNotFoundError):
+        # Fallback: User muss eigenen Key eingeben
+        st.markdown("### 🔑 Pl@ntNet API Setup")
+        st.info("💡 Kein API Key hinterlegt. Bitte gib deinen eigenen Key ein.")
+        
+        with st.expander("ℹ️ Wie bekomme ich einen API Key?"):
+            st.markdown("""
+            1. Gehe zu [Pl@ntNet API](https://my.plantnet.org/)
+            2. Erstelle einen kostenlosen Account
+            3. Erstelle einen API Key unter "Your API keys"
+            4. Füge den Key unten ein
+            
+            **Kostenlos:** 500 Identifikationen pro Tag
+            """)
+        
+        api_key = st.text_input(
+            "Pl@ntNet API Key:",
+            type="password",
+            help="Dein Pl@ntNet API Key. Wird nicht gespeichert."
+        )
+        
+        if not api_key:
+            st.warning("⚠️ Bitte gib deinen Pl@ntNet API Key ein, um fortzufahren.")
+            st.stop()
+    
+    st.markdown("---")
+    st.markdown("### 📤 Foto hochladen")
+    
+    uploaded_file = st.file_uploader(
+        "Wähle ein Pflanzenfoto:",
+        type=['jpg', 'jpeg', 'png'],
+        help="Unterstützte Formate: JPG, PNG"
+    )
+    
+    if uploaded_file is not None:
+        # Bild anzeigen
+        col1, col2 = st.columns([1, 1])
+        
+        with col1:
+            st.image(uploaded_file, caption="Hochgeladenes Bild", use_column_width=True)
+        
+        with col2:
+            st.markdown("### 🔍 Identifikation läuft...")
+            
+            with st.spinner("Pflanze wird analysiert..."):
+                result = identify_plant_with_plantnet(uploaded_file, api_key)
+            
+            if result and 'results' in result:
+                st.success("✅ Identifikation abgeschlossen!")
+                
+                # Top-Ergebnisse anzeigen
+                st.markdown("---")
+                st.markdown("### 🌿 Gefundene Pflanzen:")
+                
+                for i, plant in enumerate(result['results'][:5], 1):
+                    score = plant['score'] * 100
+                    species_name = plant['species']['scientificNameWithoutAuthor']
+                    common_names = plant['species'].get('commonNames', [])
+                    
+                    # Match mit unserer Datenbank
+                    matched_plant = suche_nach_lateinischem_namen(species_name)
+                    
+                    with st.expander(
+                        f"#{i} - {species_name} ({score:.1f}% Übereinstimmung)",
+                        expanded=(i == 1)
+                    ):
+                        st.markdown(f"**Wissenschaftlicher Name:** {species_name}")
+                        
+                        if common_names:
+                            st.markdown(f"**Volksnamen:** {', '.join(common_names[:3])}")
+                        
+                        st.progress(score / 100)
+                        
+                        # Wenn Pflanze in unserer DB ist
+                        if matched_plant:
+                            st.success("✨ Diese Pflanze ist in unserer Heilkräuter-Datenbank!")
+                            st.markdown("---")
+                            
+                            # Zeige Details OHNE verschachtelte Expander
+                            col_a, col_b = st.columns([1, 2])
+                            
+                            with col_a:
+                                # Bild laden
+                                image_extensions = ['.webp', '.jpg', '.jpeg', '.png', '.WEBP', '.JPG', '.JPEG', '.PNG']
+                                image_found = False
+                                
+                                for ext in image_extensions:
+                                    image_path = f"images/{matched_plant['deutsch'].lower()}{ext}"
+                                    if os.path.exists(image_path):
+                                        try:
+                                            img = Image.open(image_path)
+                                            st.image(img, use_column_width=True, caption=matched_plant['deutsch'])
+                                            image_found = True
+                                            break
+                                        except Exception as e:
+                                            continue
+                                
+                                if not image_found:
+                                    st.info("📷 Bild nicht verfügbar")
+                            
+                            with col_b:
+                                st.subheader(f"🌿 {matched_plant['deutsch']}")
+                                st.markdown(f"*{matched_plant['lateinisch']}*")
+                                st.markdown(f"**🩺 Symptome:** {', '.join(matched_plant['symptome'])}")
+                                st.markdown(f"**💊 Wirkungen:** {', '.join(matched_plant['wirkung'])}")
+                            
+                            # Details ohne Expander, direkt anzeigen
+                            st.markdown("---")
+                            st.markdown("**📋 Anwendung & Zubereitung:**")
+                            st.markdown(f"- **Zubereitung:** {matched_plant['zubereitung']}")
+                            
+                            st.markdown("**🌸 Erntezeit & Vorkommen:**")
+                            st.markdown(f"- **Blüte/Erntezeit:** {matched_plant['bluete_erntezeit']}")
+                            if 'erntemonate' in matched_plant:
+                                st.markdown(f"- **Erntemonate:** {', '.join(matched_plant['erntemonate'])}")
+                            st.markdown(f"- **Vorkommen:** {matched_plant['vorkommen']}")
+                            st.markdown(f"- **Als Nahrungsmittel:** {matched_plant['nahrungsmittel']}")
+                            
+                            st.markdown("**⚠️ Sicherheitshinweise:**")
+                            st.markdown(f"- **Nebenwirkungen:** {matched_plant['nebenwirkungen']}")
+                            st.markdown(f"- **Kontraindikationen:** {matched_plant['kontraindikationen']}")
+                        else:
+                            st.info("ℹ️ Diese Pflanze ist nicht in unserer Heilkräuter-Datenbank.")
+                            st.markdown(f"*Möglicherweise keine dokumentierte Heilwirkung für europäische Phytotherapie.*")
+            
+            elif result:
+                st.warning("⚠️ Keine Pflanzen erkannt. Versuche ein anderes Foto.")
+            else:
+                st.error("❌ Fehler bei der Identifikation. Bitte versuche es erneut.")
 
 # Footer
 st.markdown("---")
