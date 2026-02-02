@@ -269,30 +269,30 @@ st.markdown('<div class="main-header">🌿 Europäische Heilkräuter-Datenbank</
 st.markdown('<div class="subtitle">Wissenschaftlich belegte Heilpflanzen für die einfache Anwendung</div>', unsafe_allow_html=True)
 
 # SEO-optimierter Intro-Text (kollabierbar)
-with st.expander("ℹ️ Über diese Datenbank - Jetzt lesen!"):
+with st.expander("ℹ️ Über diese Datenbank - hier lesen für mehr Informationen"):
     st.markdown("""
     <div class="seo-text">
     <h3>🌿 Heilkräuter aus der Schweiz und Europa – Wissenschaftlich fundiert</h3>
     
-    Willkommen in der **wissenschaftlich fundierten Heilpflanzen-Datenbank mit integrierter KI-Pflanzenerkennung**! 
-    Entdecken Sie über **26 sorgfältig recherchierte Heilkräuter** mit praktischen Anwendungen, 
-    die Sie zu Hause selbst umsetzen können.
+    Willkommen in der **wissenschaftlich fundierten Heilpflanzen-Datenbank mit integrierter KI-Pflanzenerkennung**. 
+    Entdecke über **sorgfältig recherchierte Heilkräuter** mit praktischen Anwendungen, 
+    die du zu Hause selbst umsetzen kannst.
     
-    <h4>Was Sie hier finden:</h4>
+    <h4>Was du hier findest:</h4>
     
     ✅ **Wissenschaftliche Fundierung**: Alle Pflanzen basieren auf ESCOP-Monographien, 
     Kommission E-Bewertungen und aktueller Phytotherapie-Forschung
     
-    ✅ **Praktische Anwendung**: Einfache Zubereitungsmethoden wie Tees, die Sie zu Hause 
-    selbst herstellen können
+    ✅ **Praktische Anwendung**: Einfache Zubereitungsmethoden wie Tees, die du zu Hause 
+    selbst herstellen kannst
     
     ✅ **Sicherheit zuerst**: Detaillierte Informationen zu Nebenwirkungen, Kontraindikationen 
     und korrekter Dosierung
     
-    ✅ **KI-Pflanzenerkennung**: Laden Sie ein Foto hoch und lassen Sie die Pflanze automatisch 
+    ✅ **KI-Pflanzenerkennung**: Lade ein Foto hoch und lass die Pflanze automatisch 
     identifizieren (powered by Pl@ntNet)
     
-    ✅ **Saisonale Suche**: Finden Sie heraus, welche Heilkräuter gerade Saison haben
+    ✅ **Saisonale Suche**: Finde heraus, welche Heilkräuter gerade Saison haben
     
     <h4>Für wen ist diese Datenbank?</h4>
     
@@ -338,7 +338,7 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
 # Tab 1: Suche nach Symptom
 with tab1:
     st.header("Suche nach Symptom")
-    st.markdown("*Wählen Sie ein Symptom, um passende Heilpflanzen zu finden*")
+    st.markdown("*Wähle ein Symptom, um passende Heilpflanzen zu finden*")
     
     symptom = st.selectbox(
         "Wähle ein Symptom:",
@@ -360,7 +360,7 @@ with tab1:
 # Tab 2: Suche nach Wirkung
 with tab2:
     st.header("Suche nach Wirkung")
-    st.markdown("*Finden Sie Heilpflanzen mit bestimmten pharmakologischen Wirkungen*")
+    st.markdown("*Finde Heilpflanzen mit bestimmten pharmakologischen Wirkungen*")
     
     wirkung = st.selectbox(
         "Wähle eine Wirkung:",
@@ -398,7 +398,7 @@ with tab3:
 # Tab 4: Suche nach Erntezeit
 with tab4:
     st.header("Suche nach Erntezeit")
-    st.markdown("*Finden Sie heraus, welche Heilkräuter gerade Saison haben*")
+    st.markdown("*Finde heraus, welche Heilkräuter gerade Saison haben*")
     
     monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", 
               "Juli", "August", "September", "Oktober", "November", "Dezember"]
