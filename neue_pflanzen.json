@@ -1,0 +1,307 @@
+{
+  "neue_pflanzen": [
+    {
+      "id": 27,
+      "lateinisch": "Arnica montana",
+      "deutsch": "Echte Arnika / Bergwohlverleih",
+      "symptome": [
+        "Prellungen",
+        "Verstauchungen",
+        "Blutergüsse",
+        "Muskelschmerzen",
+        "Gelenkschmerzen"
+      ],
+      "wirkung": [
+        "Entzündungshemmend",
+        "Schmerzlindernd",
+        "Abschwellend",
+        "Antimikrobiell"
+      ],
+      "zubereitung": "Blüten: NUR ÄUSSERLICH als Salbe, Gel oder verdünnte Tinktur (1:10 mit Wasser) für Umschläge",
+      "bluete_erntezeit": "Juni bis August",
+      "vorkommen": "Alpine und subalpine Wiesen (1000-2800m), magere Bergwiesen, saure und kalkarme Böden, Alpen",
+      "nebenwirkungen": "Kontaktallergien möglich (Korbblütler), Hautreizungen bei längerer Anwendung, bei innerer Einnahme giftig!",
+      "kontraindikationen": "NICHT innerlich anwenden! Nicht auf offene Wunden, Allergie gegen Korbblütler, Schwangerschaft, Stillzeit",
+      "nahrungsmittel": "Nein (giftig bei innerer Anwendung)",
+      "bild": "images/arnika.png",
+      "erntemonate": [
+        "Juni",
+        "Juli",
+        "August"
+      ]
+    },
+    {
+      "id": 28,
+      "lateinisch": "Gentiana lutea",
+      "deutsch": "Gelber Enzian",
+      "symptome": [
+        "Verdauungsbeschwerden",
+        "Appetitlosigkeit",
+        "Völlegefühl",
+        "Blähungen"
+      ],
+      "wirkung": [
+        "Verdauungsfördernd",
+        "Appetitanregend",
+        "Magensaftfördernd",
+        "Galleflussfördernd"
+      ],
+      "zubereitung": "Wurzel: Tee (1/2 TL, kalt ansetzen, 8 Std ziehen, vor dem Essen trinken) oder Schnaps (Enzian-Bitter)",
+      "bluete_erntezeit": "Juli bis August (Wurzeln Herbst ab 3. Jahr)",
+      "vorkommen": "Alpine Bergwiesen (1000-2500m), Alpen, geschützte Art - nicht sammeln!",
+      "nebenwirkungen": "Bei empfindlichen Personen Kopfschmerzen, sehr selten Magenbeschwerden",
+      "kontraindikationen": "Magen- und Zwölffingerdarmgeschwüre, Sodbrennen, gastroösophagealer Reflux",
+      "nahrungsmittel": "Ja (Enzian-Schnaps, Likör - traditionelles Alpengetränk)",
+      "bild": "images/enzian.png",
+      "erntemonate": [
+        "Juli",
+        "August",
+        "September",
+        "Oktober"
+      ]
+    },
+    {
+      "id": 29,
+      "lateinisch": "Peucedanum ostruthium",
+      "deutsch": "Meisterwurz",
+      "symptome": [
+        "Husten",
+        "Bronchitis",
+        "Verdauungsbeschwerden",
+        "Erkältungen"
+      ],
+      "wirkung": [
+        "Schleimlösend",
+        "Auswurffördernd",
+        "Verdauungsfördernd",
+        "Antibakteriell"
+      ],
+      "zubereitung": "Wurzel: Tee (1 TL zerkleinerte Wurzel, 10 Min kochen) oder Tinktur, auch zum Kauen bei Halsschmerzen",
+      "bluete_erntezeit": "Juli bis August (Wurzeln Herbst)",
+      "vorkommen": "Alpine Hochstaudenfluren (1500-2500m), feuchte Bergwiesen, Alpen, Klostergärten",
+      "nebenwirkungen": "Selten Magen-Darm-Beschwerden, Photosensibilisierung möglich",
+      "kontraindikationen": "Schwangerschaft, Stillzeit",
+      "nahrungsmittel": "Ja (Wurzel als Gewürz in Alpenkäse, Schnaps)",
+      "bild": "images/meisterwurz.png",
+      "erntemonate": [
+        "Juli",
+        "August",
+        "September",
+        "Oktober"
+      ]
+    },
+    {
+      "id": 30,
+      "lateinisch": "Achillea millefolium",
+      "deutsch": "Schafgarbe",
+      "symptome": [
+        "Verdauungsbeschwerden",
+        "Appetitlosigkeit",
+        "Menstruationsbeschwerden",
+        "Wunden"
+      ],
+      "wirkung": [
+        "Krampflösend",
+        "Entzündungshemmend",
+        "Blutstillend",
+        "Verdauungsfördernd"
+      ],
+      "zubereitung": "Blühendes Kraut: Tee (1-2 TL, 10 Min ziehen), äußerlich als Sitzbad bei Unterleibsbeschwerden",
+      "bluete_erntezeit": "Juni bis September",
+      "vorkommen": "Wiesen, Wegränder, Trockenrasen, häufig und weit verbreitet bis in die Alpen",
+      "nebenwirkungen": "Selten allergische Hautreaktionen (Korbblütler), Photosensibilisierung",
+      "kontraindikationen": "Allergie gegen Korbblütler, Schwangerschaft",
+      "nahrungsmittel": "Ja (junge Blätter als Gewürz, Tee)",
+      "bild": "images/schafgarbe.png",
+      "erntemonate": [
+        "Juni",
+        "Juli",
+        "August",
+        "September"
+      ]
+    },
+    {
+      "id": 31,
+      "lateinisch": "Solidago virgaurea",
+      "deutsch": "Echte Goldrute",
+      "symptome": [
+        "Harnwegsinfekte",
+        "Blasenentzündung",
+        "Nierensteine (vorbeugend)",
+        "Prostatabeschwerden"
+      ],
+      "wirkung": [
+        "Harntreibend",
+        "Entzündungshemmend",
+        "Krampflösend",
+        "Immunstimulierend"
+      ],
+      "zubereitung": "Blühendes Kraut: Tee (2 TL, 10-15 Min ziehen), 3-4x täglich, viel Wasser trinken zur Durchspülung",
+      "bluete_erntezeit": "Juli bis Oktober",
+      "vorkommen": "Lichte Wälder, Waldränder, Heiden, Trockenrasen, bis in alpine Regionen",
+      "nebenwirkungen": "Sehr selten allergische Reaktionen",
+      "kontraindikationen": "Ödeme bei Herz- oder Niereninsuffizienz, Nierenversagen",
+      "nahrungsmittel": "Nein (nur als Arzneipflanze)",
+      "bild": "images/goldrute.png",
+      "erntemonate": [
+        "Juli",
+        "August",
+        "September",
+        "Oktober"
+      ]
+    },
+    {
+      "id": 32,
+      "lateinisch": "Crataegus monogyna / Crataegus laevigata",
+      "deutsch": "Eingriffeliger / Zweigriffeliger Weißdorn",
+      "symptome": [
+        "Leichte Herzinsuffizienz",
+        "Herzbeschwerden",
+        "Durchblutungsstörungen",
+        "Altersherz"
+      ],
+      "wirkung": [
+        "Herzstärkend",
+        "Durchblutungsfördernd",
+        "Blutdruckregulierend"
+      ],
+      "zubereitung": "Blätter mit Blüten: Tee (1-2 TL, 10-15 Min ziehen), 2-3x täglich über Wochen/Monate",
+      "bluete_erntezeit": "Mai bis Juni (Blüten), September-Oktober (Früchte)",
+      "vorkommen": "Waldränder, Hecken, Gebüsche, lichte Wälder, weit verbreitet bis Voralpen",
+      "nebenwirkungen": "Sehr selten, eventuell leichte Magen-Darm-Beschwerden",
+      "kontraindikationen": "Keine bekannt, aber ärztliche Kontrolle bei Herzerkrankungen wichtig",
+      "nahrungsmittel": "Ja (Früchte, Blüten)",
+      "bild": "images/weissdorn.png",
+      "erntemonate": [
+        "Mai",
+        "Juni",
+        "September",
+        "Oktober"
+      ]
+    },
+    {
+      "id": 33,
+      "lateinisch": "Agrimonia eupatoria",
+      "deutsch": "Kleiner Odermennig",
+      "symptome": [
+        "Durchfall",
+        "Magen-Darm-Entzündungen",
+        "Halsschmerzen",
+        "Hautprobleme"
+      ],
+      "wirkung": [
+        "Adstringierend",
+        "Entzündungshemmend",
+        "Blutreinigend",
+        "Wundheilend"
+      ],
+      "zubereitung": "Blühendes Kraut: Tee (2 TL, 10 Min ziehen) oder zum Gurgeln, äußerlich als Umschlag",
+      "bluete_erntezeit": "Juni bis September",
+      "vorkommen": "Wegränder, trockene Wiesen, Waldränder, lichte Gebüsche, bis in Voralpenlagen",
+      "nebenwirkungen": "Sehr selten, bei empfindlichen Personen Magen-Darm-Beschwerden",
+      "kontraindikationen": "Keine bekannt",
+      "nahrungsmittel": "Ja (junge Blätter als Tee, historisch auch als Gemüse)",
+      "bild": "images/odermennig.png",
+      "erntemonate": [
+        "Juni",
+        "Juli",
+        "August",
+        "September"
+      ]
+    },
+    {
+      "id": 34,
+      "lateinisch": "Calendula officinalis",
+      "deutsch": "Ringelblume",
+      "symptome": [
+        "Wunden",
+        "Hautreizungen",
+        "Entzündungen",
+        "Verbrennungen"
+      ],
+      "wirkung": [
+        "Wundheilend",
+        "Entzündungshemmend",
+        "Antibakteriell",
+        "Durchblutungsfördernd"
+      ],
+      "zubereitung": "Blüten: Tee (1-2 TL, 10 Min ziehen) für Umschläge/Waschungen, innerlich bei Magen-Darm-Beschwerden",
+      "bluete_erntezeit": "Juni bis Oktober",
+      "vorkommen": "Gärten, verwildert auf Brachflächen, ursprünglich Mittelmeer, in der Schweiz kultiviert",
+      "nebenwirkungen": "Selten allergische Reaktionen (Korbblütler)",
+      "kontraindikationen": "Allergie gegen Korbblütler",
+      "nahrungsmittel": "Ja (Blütenblätter als Dekoration, Tee)",
+      "bild": "images/ringelblume.png",
+      "erntemonate": [
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober"
+      ]
+    },
+    {
+      "id": 35,
+      "lateinisch": "Galium verum",
+      "deutsch": "Echtes Labkraut",
+      "symptome": [
+        "Nieren- und Blasenbeschwerden",
+        "Lymphstau",
+        "Hautprobleme",
+        "Wunden"
+      ],
+      "wirkung": [
+        "Harntreibend",
+        "Lymphflussfördernd",
+        "Wundheilend",
+        "Entzündungshemmend"
+      ],
+      "zubereitung": "Blühendes Kraut: Tee (2 TL, 10 Min ziehen), 2-3x täglich, äußerlich als Umschlag",
+      "bluete_erntezeit": "Juni bis September",
+      "vorkommen": "Trockenwiesen, Wegränder, Magerrasen, sonnige Standorte, bis in Berglagen",
+      "nebenwirkungen": "Sehr selten, keine bekannt",
+      "kontraindikationen": "Keine bekannt",
+      "nahrungsmittel": "Ja (historisch zum Käsemachen - daher 'Labkraut', junge Blätter als Salat)",
+      "bild": "images/labkraut.png",
+      "erntemonate": [
+        "Juni",
+        "Juli",
+        "August",
+        "September"
+      ]
+    },
+    {
+      "id": 36,
+      "lateinisch": "Juglans regia",
+      "deutsch": "Walnussbaum",
+      "symptome": [
+        "Hauterkrankungen",
+        "Ekzeme",
+        "Durchfall",
+        "übermäßiges Schwitzen"
+      ],
+      "wirkung": [
+        "Adstringierend",
+        "Entzündungshemmend",
+        "Blutreinigend",
+        "Schweißhemmend"
+      ],
+      "zubereitung": "Blätter: Tee (1-2 TL, 10 Min ziehen) oder äußerlich als Umschlag/Bad bei Hautproblemen",
+      "bluete_erntezeit": "April bis Mai (Blüten), Blätter Mai-August, Nüsse September-Oktober",
+      "vorkommen": "Gärten, Parks, Obstgärten, warme Lagen bis Voralpen, ursprünglich Südosteuropa",
+      "nebenwirkungen": "Sehr selten, bei empfindlichen Personen Magen-Darm-Beschwerden",
+      "kontraindikationen": "Keine bekannt",
+      "nahrungsmittel": "Ja (Nüsse, junge grüne Nüsse für Likör)",
+      "bild": "images/walnuss.png",
+      "erntemonate": [
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober"
+      ]
+    }
+  ]
+}
