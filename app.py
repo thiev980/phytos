@@ -624,7 +624,7 @@ with tab7:
     st.markdown("""
     **Für Admins:** Das vollständige Analytics-Dashboard ist verfügbar unter:
     
-    👉 **[Plausible Dashboard öffnen](https://plausible.io/your-app.streamlit.app)**
+    👉 **[Plausible Dashboard öffnen](https://plausible.io/pythos.streamlit.app)**
     
     *(Login erforderlich - nur für Seitenbetreiber sichtbar)*
     """)
