@@ -287,12 +287,12 @@ st.markdown('<div class="main-header">🌿 Europäische Heilkräuter-Datenbank</
 st.markdown('<div class="subtitle">Wissenschaftlich belegte Heilpflanzen für die einfache Anwendung</div>', unsafe_allow_html=True)
 
 # SEO-optimierter Intro-Text (kollabierbar)
-with st.expander("ℹ️ Über diese Datenbank - Jetzt lesen!"):
+with st.expander("ℹ️ Über diese Datenbank - Klicken zum Aufklappen"):
     st.markdown("""
     <div class="seo-text">
     <h3>🌿 Heilkräuter aus der Schweiz und Europa – Wissenschaftlich fundiert</h3>
     
-    Willkommen in der **wissenschaftlich fundierten Heilpflanzen-Datenbank mit integrierter KI-Pflanzenerkennung**! 
+    Willkommen in der **wissenschaftlich fundierten Heilpflanzen-Datenbank mit integrierter KI-Pflanzenerkennung**. 
     Entdecke über **26 sorgfältig recherchierte Heilkräuter** mit praktischen Anwendungen, 
     die du zu Hause selbst umsetzen kannst.
     
@@ -343,13 +343,14 @@ with st.expander("ℹ️ Über diese Datenbank - Jetzt lesen!"):
 st.markdown("---")
 
 # Tabs für verschiedene Suchoptionen
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "🔍 Nach Symptom suchen",
     "💊 Nach Wirkung suchen", 
     "🌿 Nach Pflanze suchen",
     "📅 Nach Erntezeit suchen",
     "📚 Alle Pflanzen",
-    "📸 Pflanze erkennen"
+    "📸 Pflanze erkennen",
+    "📖 Anwendungs-Guide"
 ])
 
 # Tab 1: Suche nach Symptom
@@ -615,6 +616,170 @@ with tab6:
                 st.warning("⚠️ Keine Pflanzen erkannt. Versuche ein anderes Foto.")
             else:
                 st.error("❌ Fehler bei der Identifikation. Bitte versuche es erneut.")
+
+# Tab 7: Anwendungs-Guide
+with tab7:
+    track_plausible_event("Guide View", {"section": "overview"})
+    
+    st.header("📖 Anwendungs-Guide für Heilkräuter")
+    st.markdown("*Praktisches Wissen für die sichere Anwendung zu Hause*")
+    
+    st.markdown("---")
+    
+    # Übersicht
+    st.info("""
+    **In diesem Guide:** Tee-Zubereitung • Sammeln & Trocknen • Umschläge & Bäder • 
+    Tinkturen & Salben • Sicherheit & Dosierung
+    """)
+    
+    # 🍵 TEE-ZUBEREITUNG
+    with st.expander("🍵 **Tee-Zubereitung**", expanded=False):
+        st.markdown("""
+        ### Heißer Aufguss (Infus)
+        **Für:** Blüten, Blätter (Kamille, Pfefferminze, Thymian)  
+        **Methode:** 1-2 TL mit kochendem Wasser übergießen, zudecken, 5-10 Min ziehen, abseihen  
+        **Wichtig:** Zudecken, damit ätherische Öle nicht verdampfen!
+        
+        ### Kaltauszug (Mazeration)
+        **Für:** Schleimstoffhaltige Pflanzen (Eibisch, Malve, Baldrian)  
+        **Methode:** 1-2 TL mit kaltem Wasser, 2-8 Std ziehen, optional leicht erwärmen  
+        **Warum:** Schleimstoffe lösen sich besser in kaltem Wasser
+        
+        ### Abkochung (Dekokt)
+        **Für:** Wurzeln, Rinden (Baldrianwurzel, Schachtelhalm)  
+        **Methode:** 1-2 TL mit kaltem Wasser ansetzen, 10-15 Min kochen, abseihen  
+        **Warum:** Wirkstoffe aus harten Teilen brauchen Hitze
+        
+        **Dosierung:** 2-3 Tassen täglich • Nicht länger als 2-3 Wochen ohne Pause
+        """)
+    
+    # 🌿 SAMMELN & TROCKNEN
+    with st.expander("🌿 **Sammeln & Trocknen**", expanded=False):
+        st.markdown("""
+        ### Sammeln
+        **Wann:** Vormittag nach dem Tau (10-12 Uhr), trockenes Wetter  
+        **Wo:** Saubere Standorte, nicht an Straßen!  
+        **Wie:** Max. 1/3 ernten, geschützte Arten meiden (Arnika!)
+        
+        ### Trocknen
+        **Methode 1 - Lufttrocknung (beste!):**  
+        • Lose auf Tuch ausbreiten oder Bündel aufhängen  
+        • Dunkel, warm (20-25°C), luftig  
+        • Täglich wenden  
+        • 5-10 Tage
+        
+        **Methode 2 - Dörrautomat:**  
+        • Max. 35°C (bei ätherischen Ölen)  
+        • 4-8 Stunden
+        
+        ### Lagerung
+        **Behälter:** Dunkelglas, Papiertüten  
+        **Bedingungen:** Kühl, trocken, dunkel  
+        **Haltbarkeit:** Blüten/Blätter 1 Jahr, Wurzeln 2-3 Jahre  
+        **Beschriften:** Name, Pflanzenteil, Datum
+        """)
+    
+    # 🧴 UMSCHLÄGE & BÄDER
+    with st.expander("🧴 **Umschläge & Bäder**", expanded=False):
+        st.markdown("""
+        ### Kalter Umschlag
+        **Wann:** Entzündungen, Schwellungen, Prellungen  
+        **Wie:** Starken Tee (3-4 TL) zubereiten, abkühlen, Tuch tränken, 15-20 Min auflegen  
+        **Beispiel:** Arnika bei Prellungen
+        
+        ### Warmer Umschlag
+        **Wann:** Verspannungen, Krämpfe  
+        **Wie:** Heißen Tee, Tuch tränken (nicht zu heiß!), 20-30 Min auflegen  
+        **Beispiel:** Kamille bei Bauchschmerzen
+        
+        ### Breiumschlag (Frisch)
+        **Wann:** Insektenstiche, erste Hilfe unterwegs  
+        **Wie:** Frische Blätter zerquetschen, direkt auflegen  
+        **Beispiel:** Spitzwegerich bei Mückenstichen
+        
+        ### Vollbad
+        **Wie:** 100-200g Kräuter auf 2-3L Wasser, Sud ins Bad, 36-38°C, max. 20 Min  
+        **Beispiele:** Kamille (Haut), Thymian (Atemwege)
+        
+        ### Sitzbad
+        **Wie:** 50g Kräuter auf 1L Wasser, Sud in Sitzwanne, 36-38°C, 10-15 Min  
+        **Beispiel:** Kamille bei Hämorrhoiden
+        """)
+    
+    # 💊 TINKTUREN & SALBEN
+    with st.expander("💊 **Tinkturen & Salben**", expanded=False):
+        st.markdown("""
+        ### Tinktur (alkoholischer Auszug)
+        **Herstellung:**  
+        1. Glas zu 1/3-1/2 mit Kräutern füllen  
+        2. Mit 40-70% Alkohol (Korn, Wodka) bedecken  
+        3. 2-6 Wochen ziehen, täglich schütteln  
+        4. Abseihen, in dunkle Tropfflasche füllen  
+        
+        **Dosierung:** 3x täglich 20-30 Tropfen in Wasser  
+        **Haltbarkeit:** 3-5 Jahre  
+        **Nicht für:** Kinder, Schwangere, Alkoholiker
+        
+        ### Ölauszug
+        **Herstellung:**  
+        1. Getrocknete Kräuter (2/3) in Glas  
+        2. Mit Öl (Oliven-, Mandelöl) bedecken  
+        3. 4-6 Wochen auf Fensterbank, täglich schütteln  
+        4. Abseihen  
+        
+        **Verwendung:** Massage, Basis für Salben  
+        **Haltbarkeit:** 6-12 Monate  
+        **Beispiel:** Johanniskraut-Rotöl
+        
+        ### Salbe
+        **Rezept:** 100ml Ölauszug + 10-15g Bienenwachs  
+        **Herstellung:** Im Wasserbad schmelzen, in Tiegel füllen  
+        **Haltbarkeit:** 6-12 Monate
+        """)
+    
+    # ⚠️ SICHERHEIT
+    with st.expander("⚠️ **Sicherheit & Dosierung**", expanded=False):
+        st.markdown("""
+        ### Dosierung
+        **Erwachsene:** 1-2 TL getrocknete Kräuter pro Tasse, 2-3 Tassen täglich  
+        **Kinder (6-12 Jahre):** Halbe Dosis  
+        **Kinder (2-6 Jahre):** Viertel Dosis, nur milde Kräuter  
+        **Säuglinge:** Nur nach ärztlicher Anweisung!
+        
+        ### Anwendungsdauer
+        **Akut (Erkältung):** Max. 2-3 Wochen  
+        **Chronisch:** 6-8 Wochen, dann 2 Wochen Pause  
+        **Kuren:** 4-6 Wochen, dann 4 Wochen Pause
+        
+        ### Schwangerschaft & Stillzeit
+        **❌ Nicht verwenden:** Johanniskraut, Salbei (therapeutisch), Gundermann, Schafgarbe  
+        **✅ In Maßen ok:** Kamille, Fenchel, Lindenblüten, Melisse  
+        **Grundregel:** IMMER mit Arzt/Hebamme absprechen!
+        
+        ### Wechselwirkungen
+        **Johanniskraut:** Viele! (Antidepressiva, Pille, Blutverdünner)  
+        **Baldrian:** Verstärkt Schlafmittel  
+        **Grundregel:** Bei Dauermedikation Arzt/Apotheker fragen!
+        
+        ### Wann zum Arzt?
+        - Starke Schmerzen, hohes Fieber (>39°C)
+        - Atemnot, allergische Reaktionen
+        - Keine Besserung nach 1 Woche
+        - Bei chronischen Erkrankungen immer ärztliche Begleitung
+        
+        ### Korbblütler-Allergie
+        **Vorsicht bei:** Kamille, Arnika, Ringelblume, Schafgarbe  
+        **Test:** Kleine Menge trinken, 24h warten  
+        **Bei Allergie:** Diese Pflanzen meiden!
+        """)
+    
+    st.markdown("---")
+    
+    st.warning("""
+    **⚠️ Wichtig:** Dieser Guide ersetzt keine ärztliche Beratung! Bei Krankheiten 
+    immer einen Arzt konsultieren. Heilkräuter sind wirksam, aber nicht harmlos - 
+    richtige Anwendung ist entscheidend!
+    """)
 
 # Footer mit SEO-Content
 st.markdown("---")
