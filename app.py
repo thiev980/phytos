@@ -39,7 +39,7 @@ st.markdown("""
 <meta property="og:title" content="Heilkräuter Schweiz - Wissenschaftliche Heilpflanzen-Datenbank">
 <meta property="og:description" content="Über 26 wissenschaftlich belegte Heilpflanzen mit Anwendung, Wirkung und Zubereitung. Inklusive KI-Pflanzenerkennung.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://phythos.streamlit.app/app/static/heilkraeuter-og.png">
+<meta property="og:image" content="https://phytos.streamlit.app/app/static/heilkraeuter-og.png">
 
 <!-- Schema.org Structured Data for Google -->
 <script type="application/ld+json">
@@ -625,7 +625,7 @@ with tab7:
     st.markdown("""
     **Für Admins:** Das vollständige Analytics-Dashboard ist verfügbar unter:
     
-    👉 **[Plausible Dashboard öffnen](https://plausible.io/phythos.streamlit.app)**
+    👉 **[Plausible Dashboard öffnen](https://plausible.io/phytos.streamlit.app)**
     
     *(Login erforderlich - nur für Seitenbetreiber sichtbar)*
     """)
