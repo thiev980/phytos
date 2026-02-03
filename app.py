@@ -334,19 +334,22 @@ def zeige_pflanze(pflanze, show_details=False):
         st.markdown(f"**💊 Wirkungen:** {', '.join(pflanze['wirkung'])}")
         
         if show_details:
-            with st.expander("📋 Anwendung & Zubereitung"):
-                st.markdown(f"**Zubereitung:** {pflanze['zubereitung']}")
+            st.markdown("---")
+            st.markdown("**📋 Anwendung & Zubereitung:**")
+            st.markdown(f"{pflanze['zubereitung']}")
             
-            with st.expander("🌸 Erntezeit & Vorkommen"):
-                st.markdown(f"**Blüte/Erntezeit:** {pflanze['bluete_erntezeit']}")
-                if 'erntemonate' in pflanze:
-                    st.markdown(f"**Erntemonate:** {', '.join(pflanze['erntemonate'])}")
-                st.markdown(f"**Vorkommen:** {pflanze['vorkommen']}")
-                st.markdown(f"**Als Nahrungsmittel:** {pflanze['nahrungsmittel']}")
+            st.markdown("---")
+            st.markdown("**🌸 Erntezeit & Vorkommen:**")
+            st.markdown(f"**Blüte/Erntezeit:** {pflanze['bluete_erntezeit']}")
+            if 'erntemonate' in pflanze:
+                st.markdown(f"**Erntemonate:** {', '.join(pflanze['erntemonate'])}")
+            st.markdown(f"**Vorkommen:** {pflanze['vorkommen']}")
+            st.markdown(f"**Als Nahrungsmittel:** {pflanze['nahrungsmittel']}")
             
-            with st.expander("⚠️ Sicherheitshinweise"):
-                st.markdown(f"**Nebenwirkungen:** {pflanze['nebenwirkungen']}")
-                st.markdown(f"**Kontraindikationen:** {pflanze['kontraindikationen']}")
+            st.markdown("---")
+            st.markdown("**⚠️ Sicherheitshinweise:**")
+            st.markdown(f"**Nebenwirkungen:** {pflanze['nebenwirkungen']}")
+            st.markdown(f"**Kontraindikationen:** {pflanze['kontraindikationen']}")
 
 # Header mit SEO-Content - klickbar für Zurück zum Start
 st.markdown("""
@@ -422,40 +425,20 @@ with st.expander("ℹ️ Über diese Datenbank - Jetzt lesen!"):
 
 st.markdown("---")
 
-# Sidebar Navigation (besser für Mobile!)
-with st.sidebar:
-    st.markdown("### 🧭 Navigation")
-    
-    page = st.radio(
-        "Wähle eine Ansicht:",
-        [
-            "🔍 Nach Symptom suchen",
-            "💊 Nach Wirkung suchen",
-            "🌿 Nach Pflanze suchen",
-            "📅 Nach Erntezeit suchen",
-            "📚 Alle Pflanzen",
-            "📸 Pflanze erkennen",
-            "📖 Anwendungs-Guide"
-        ],
-        label_visibility="collapsed"
-    )
-    
-    st.markdown("---")
-    
-    # Quick Info
-    st.caption(f"🌿 **{len(pflanzen)} Heilpflanzen** in der Datenbank")
-    st.caption("📅 Stand: Februar 2026")
-    
-    st.markdown("---")
-    
-    # Plausible Analytics Privacy Note
-    st.caption("""
-    🔒 **Privacy:** Diese App nutzt Plausible Analytics 
-    (DSGVO-konform, ohne Cookies)
-    """)
+# Accordion-Style Navigation - Single Page mit aufklappbaren Sections
+st.markdown("""
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            color: white; padding: 20px; border-radius: 10px; margin-bottom: 25px;
+            text-align: center;">
+    <h3 style="margin: 0; color: white;">🧭 Wähle eine Kategorie</h3>
+    <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 0.9rem;">
+    Klicke auf eine Kategorie, um sie zu öffnen
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
-# Content basierend auf Seitenauswahl
-if page == "🔍 Nach Symptom suchen":
+# 🔍 SECTION 1: Nach Symptom suchen
+with st.expander("🔍 **Nach Symptom suchen**", expanded=False):
     st.header("Suche nach Symptom")
     st.markdown("*Wähle ein Symptom, um passende Heilpflanzen zu finden*")
     
@@ -479,7 +462,8 @@ if page == "🔍 Nach Symptom suchen":
         else:
             st.warning("Keine Pflanzen gefunden.")
 
-elif page == "💊 Nach Wirkung suchen":
+# 💊 SECTION 2: Nach Wirkung suchen
+with st.expander("💊 **Nach Wirkung suchen**", expanded=False):
     st.header("Suche nach Wirkung")
     st.markdown("*Finde Heilpflanzen mit bestimmten pharmakologischen Wirkungen*")
     
@@ -503,7 +487,8 @@ elif page == "💊 Nach Wirkung suchen":
         else:
             st.warning("Keine Pflanzen gefunden.")
 
-elif page == "🌿 Nach Pflanze suchen":
+# 🌿 SECTION 3: Nach Pflanze suchen
+with st.expander("🌿 **Nach Pflanze suchen**", expanded=False):
     st.header("Suche nach Pflanze")
     st.markdown("*Detaillierte Informationen zu einzelnen Heilpflanzen*")
     
@@ -521,7 +506,8 @@ elif page == "🌿 Nach Pflanze suchen":
         if pflanze:
             zeige_pflanze(pflanze, show_details=True)
 
-elif page == "📅 Nach Erntezeit suchen":
+# 📅 SECTION 4: Nach Erntezeit suchen
+with st.expander("📅 **Nach Erntezeit suchen**", expanded=False):
     st.header("Suche nach Erntezeit")
     st.markdown("*Finde heraus, welche Heilkräuter gerade Saison haben*")
     
@@ -549,33 +535,35 @@ elif page == "📅 Nach Erntezeit suchen":
     else:
         st.info(f"Keine Pflanzen für {monat} in der Datenbank.")
 
-elif page == "📚 Alle Pflanzen":
+# 📚 SECTION 5: Alle Pflanzen
+with st.expander("📚 **Alle Pflanzen anzeigen**", expanded=False):
     st.header("Alle Pflanzen (Übersicht)")
     st.markdown(f"*Gesamte Datenbank: {len(pflanzen)} wissenschaftlich belegte Heilpflanzen*")
     
     for pflanze in pflanzen:
-        with st.expander(f"🌿 {pflanze['deutsch']} (*{pflanze['lateinisch']}*)"):
-            st.markdown("---")
-            col3, col4 = st.columns(2)
-            
-            with col3:
-                st.markdown(f"**🩺 Symptome:** {', '.join(pflanze['symptome'])}")
-                st.markdown(f"**💊 Wirkungen:** {', '.join(pflanze['wirkung'])}")
-                st.markdown(f"**📋 Zubereitung:** {pflanze['zubereitung']}")
-            
-            with col4:
-                st.markdown(f"**🌸 Blüte/Erntezeit:** {pflanze['bluete_erntezeit']}")
-                if 'erntemonate' in pflanze:
-                    st.markdown(f"**📅 Erntemonate:** {', '.join(pflanze['erntemonate'])}")
-                st.markdown(f"**📍 Vorkommen:** {pflanze['vorkommen']}")
-                st.markdown(f"**🍴 Als Nahrungsmittel:** {pflanze['nahrungsmittel']}")
-            
-            st.markdown("---")
-            st.markdown(f"**⚠️ Nebenwirkungen:** {pflanze['nebenwirkungen']}")
-            st.markdown(f"**🚫 Kontraindikationen:** {pflanze['kontraindikationen']}")
+        st.markdown("---")
+        st.markdown(f"### 🌿 {pflanze['deutsch']}")
+        st.markdown(f"*{pflanze['lateinisch']}*")
+        
+        col3, col4 = st.columns(2)
+        
+        with col3:
+            st.markdown(f"**🩺 Symptome:** {', '.join(pflanze['symptome'])}")
+            st.markdown(f"**💊 Wirkungen:** {', '.join(pflanze['wirkung'])}")
+            st.markdown(f"**📋 Zubereitung:** {pflanze['zubereitung']}")
+        
+        with col4:
+            st.markdown(f"**🌸 Blüte/Erntezeit:** {pflanze['bluete_erntezeit']}")
+            if 'erntemonate' in pflanze:
+                st.markdown(f"**📅 Erntemonate:** {', '.join(pflanze['erntemonate'])}")
+            st.markdown(f"**📍 Vorkommen:** {pflanze['vorkommen']}")
+            st.markdown(f"**🍴 Als Nahrungsmittel:** {pflanze['nahrungsmittel']}")
+        
+        st.markdown(f"**⚠️ Nebenwirkungen:** {pflanze['nebenwirkungen']}")
+        st.markdown(f"**🚫 Kontraindikationen:** {pflanze['kontraindikationen']}")
 
-# Seite 6: Pflanze erkennen
-elif page == "📸 Pflanze erkennen":
+# 📸 SECTION 6: Pflanze erkennen
+with st.expander("📸 **Pflanze erkennen (KI)**", expanded=False):
     st.header("📸 Pflanze erkennen")
     st.markdown("""
     Lade ein Foto einer Pflanze hoch und die App versucht, sie zu identifizieren.
@@ -653,59 +641,56 @@ elif page == "📸 Pflanze erkennen":
                     
                     matched_plant = suche_nach_lateinischem_namen(species_name)
                     
-                    with st.expander(
-                        f"#{i} - {species_name} ({score:.1f}% Übereinstimmung)",
-                        expanded=(i == 1)
-                    ):
-                        st.markdown(f"**Wissenschaftlicher Name:** {species_name}")
+                    st.markdown("---")
+                    st.markdown(f"### #{i} - {species_name}")
+                    st.markdown(f"**Übereinstimmung:** {score:.1f}%")
+                    st.progress(score / 100)
+                    
+                    if common_names:
+                        st.markdown(f"**Volksnamen:** {', '.join(common_names[:3])}")
+                    
+                    if matched_plant:
+                        st.success("✨ Diese Pflanze ist in unserer Heilkräuter-Datenbank!")
+                        st.markdown("---")
                         
-                        if common_names:
-                            st.markdown(f"**Volksnamen:** {', '.join(common_names[:3])}")
+                        col_a, col_b = st.columns([1, 2])
                         
-                        st.progress(score / 100)
-                        
-                        if matched_plant:
-                            st.success("✨ Diese Pflanze ist in unserer Heilkräuter-Datenbank!")
-                            st.markdown("---")
-                            
-                            col_a, col_b = st.columns([1, 2])
-                            
-                            with col_a:
-                                # Verwende bild-Pfad aus JSON
-                                if 'bild' in matched_plant and matched_plant['bild']:
-                                    image_path = matched_plant['bild']
-                                    if os.path.exists(image_path):
-                                        try:
-                                            img = Image.open(image_path)
-                                            st.image(img, use_column_width=True, caption=matched_plant['deutsch'])
-                                        except Exception as e:
-                                            st.info("📷 Bild nicht verfügbar")
-                                    else:
+                        with col_a:
+                            # Verwende bild-Pfad aus JSON
+                            if 'bild' in matched_plant and matched_plant['bild']:
+                                image_path = matched_plant['bild']
+                                if os.path.exists(image_path):
+                                    try:
+                                        img = Image.open(image_path)
+                                        st.image(img, use_column_width=True, caption=matched_plant['deutsch'])
+                                    except Exception as e:
                                         st.info("📷 Bild nicht verfügbar")
                                 else:
                                     st.info("📷 Bild nicht verfügbar")
-                            
-                            with col_b:
-                                st.subheader(f"🌿 {matched_plant['deutsch']}")
-                                st.markdown(f"*{matched_plant['lateinisch']}*")
-                                st.markdown(f"**🩺 Symptome:** {', '.join(matched_plant['symptome'])}")
-                                st.markdown(f"**💊 Wirkungen:** {', '.join(matched_plant['wirkung'])}")
-                            
-                            st.markdown("---")
-                            st.markdown("**📋 Anwendung & Zubereitung:**")
-                            st.markdown(f"- **Zubereitung:** {matched_plant['zubereitung']}")
-                            
-                            st.markdown("**🌸 Erntezeit & Vorkommen:**")
-                            st.markdown(f"- **Blüte/Erntezeit:** {matched_plant['bluete_erntezeit']}")
-                            if 'erntemonate' in matched_plant:
-                                st.markdown(f"- **Erntemonate:** {', '.join(matched_plant['erntemonate'])}")
-                            st.markdown(f"- **Vorkommen:** {matched_plant['vorkommen']}")
-                            st.markdown(f"- **Als Nahrungsmittel:** {matched_plant['nahrungsmittel']}")
-                            
-                            st.markdown("**⚠️ Sicherheitshinweise:**")
-                            st.markdown(f"- **Nebenwirkungen:** {matched_plant['nebenwirkungen']}")
-                            st.markdown(f"- **Kontraindikationen:** {matched_plant['kontraindikationen']}")
-                        else:
+                            else:
+                                st.info("📷 Bild nicht verfügbar")
+                        
+                        with col_b:
+                            st.subheader(f"🌿 {matched_plant['deutsch']}")
+                            st.markdown(f"*{matched_plant['lateinisch']}*")
+                            st.markdown(f"**🩺 Symptome:** {', '.join(matched_plant['symptome'])}")
+                            st.markdown(f"**💊 Wirkungen:** {', '.join(matched_plant['wirkung'])}")
+                        
+                        st.markdown("---")
+                        st.markdown("**📋 Anwendung & Zubereitung:**")
+                        st.markdown(f"- **Zubereitung:** {matched_plant['zubereitung']}")
+                        
+                        st.markdown("**🌸 Erntezeit & Vorkommen:**")
+                        st.markdown(f"- **Blüte/Erntezeit:** {matched_plant['bluete_erntezeit']}")
+                        if 'erntemonate' in matched_plant:
+                            st.markdown(f"- **Erntemonate:** {', '.join(matched_plant['erntemonate'])}")
+                        st.markdown(f"- **Vorkommen:** {matched_plant['vorkommen']}")
+                        st.markdown(f"- **Als Nahrungsmittel:** {matched_plant['nahrungsmittel']}")
+                        
+                        st.markdown("**⚠️ Sicherheitshinweise:**")
+                        st.markdown(f"- **Nebenwirkungen:** {matched_plant['nebenwirkungen']}")
+                        st.markdown(f"- **Kontraindikationen:** {matched_plant['kontraindikationen']}")
+                    else:
                             st.info("ℹ️ Diese Pflanze ist nicht in unserer Heilkräuter-Datenbank.")
                             st.markdown(f"*Möglicherweise keine dokumentierte Heilwirkung für europäische Phytotherapie.*")
             
@@ -715,7 +700,8 @@ elif page == "📸 Pflanze erkennen":
                 st.error("❌ Fehler bei der Identifikation. Bitte versuche es erneut.")
 
 
-elif page == "📖 Anwendungs-Guide":
+# 📖 SECTION 7: Anwendungs-Guide
+with st.expander("📖 **Anwendungs-Guide**", expanded=False):
     
     st.header("📖 Anwendungs-Guide für Heilkräuter")
     st.markdown("*Praktisches Wissen für die sichere Anwendung zu Hause*")
@@ -729,145 +715,150 @@ elif page == "📖 Anwendungs-Guide":
     """)
     
     # 🍵 TEE-ZUBEREITUNG
-    with st.expander("🍵 **Tee-Zubereitung**", expanded=False):
-        st.markdown("""
-        ### Heißer Aufguss (Infus)
-        **Für:** Blüten, Blätter (Kamille, Pfefferminze, Thymian)  
-        **Methode:** 1-2 TL mit kochendem Wasser übergießen, zudecken, 5-10 Min ziehen, abseihen  
-        **Wichtig:** Zudecken, damit ätherische Öle nicht verdampfen!
-        
-        ### Kaltauszug (Mazeration)
-        **Für:** Schleimstoffhaltige Pflanzen (Eibisch, Malve, Baldrian)  
-        **Methode:** 1-2 TL mit kaltem Wasser, 2-8 Std ziehen, optional leicht erwärmen  
-        **Warum:** Schleimstoffe lösen sich besser in kaltem Wasser
-        
-        ### Abkochung (Dekokt)
-        **Für:** Wurzeln, Rinden (Baldrianwurzel, Schachtelhalm)  
-        **Methode:** 1-2 TL mit kaltem Wasser ansetzen, 10-15 Min kochen, abseihen  
-        **Warum:** Wirkstoffe aus harten Teilen brauchen Hitze
-        
-        **Dosierung:** 2-3 Tassen täglich • Nicht länger als 2-3 Wochen ohne Pause
-        """)
+    st.markdown("---")
+    st.markdown("## 🍵 Tee-Zubereitung")
+    st.markdown("""
+    ### Heißer Aufguss (Infus)
+    **Für:** Blüten, Blätter (Kamille, Pfefferminze, Thymian)  
+    **Methode:** 1-2 TL mit kochendem Wasser übergießen, zudecken, 5-10 Min ziehen, abseihen  
+    **Wichtig:** Zudecken, damit ätherische Öle nicht verdampfen!
+    
+    ### Kaltauszug (Mazeration)
+    **Für:** Schleimstoffhaltige Pflanzen (Eibisch, Malve, Baldrian)  
+    **Methode:** 1-2 TL mit kaltem Wasser, 2-8 Std ziehen, optional leicht erwärmen  
+    **Warum:** Schleimstoffe lösen sich besser in kaltem Wasser
+    
+    ### Abkochung (Dekokt)
+    **Für:** Wurzeln, Rinden (Baldrianwurzel, Schachtelhalm)  
+    **Methode:** 1-2 TL mit kaltem Wasser ansetzen, 10-15 Min kochen, abseihen  
+    **Warum:** Wirkstoffe aus harten Teilen brauchen Hitze
+    
+    **Dosierung:** 2-3 Tassen täglich • Nicht länger als 2-3 Wochen ohne Pause
+    """)
     
     # 🌿 SAMMELN & TROCKNEN
-    with st.expander("🌿 **Sammeln & Trocknen**", expanded=False):
-        st.markdown("""
-        ### Sammeln
-        **Wann:** Vormittag nach dem Tau (10-12 Uhr), trockenes Wetter  
-        **Wo:** Saubere Standorte, nicht an Straßen!  
-        **Wie:** Max. 1/3 ernten, geschützte Arten meiden (Arnika!)
-        
-        ### Trocknen
-        **Methode 1 - Lufttrocknung (beste!):**  
-        • Lose auf Tuch ausbreiten oder Bündel aufhängen  
-        • Dunkel, warm (20-25°C), luftig  
-        • Täglich wenden  
-        • 5-10 Tage
-        
-        **Methode 2 - Dörrautomat:**  
-        • Max. 35°C (bei ätherischen Ölen)  
-        • 4-8 Stunden
-        
-        ### Lagerung
-        **Behälter:** Dunkelglas, Papiertüten  
-        **Bedingungen:** Kühl, trocken, dunkel  
-        **Haltbarkeit:** Blüten/Blätter 1 Jahr, Wurzeln 2-3 Jahre  
-        **Beschriften:** Name, Pflanzenteil, Datum
-        """)
+    st.markdown("---")
+    st.markdown("## 🌿 Sammeln & Trocknen")
+    st.markdown("""
+    ### Sammeln
+    **Wann:** Vormittag nach dem Tau (10-12 Uhr), trockenes Wetter  
+    **Wo:** Saubere Standorte, nicht an Straßen!  
+    **Wie:** Max. 1/3 ernten, geschützte Arten meiden (Arnika!)
+    
+    ### Trocknen
+    **Methode 1 - Lufttrocknung (beste!):**  
+    • Lose auf Tuch ausbreiten oder Bündel aufhängen  
+    • Dunkel, warm (20-25°C), luftig  
+    • Täglich wenden  
+    • 5-10 Tage
+    
+    **Methode 2 - Dörrautomat:**  
+    • Max. 35°C (bei ätherischen Ölen)  
+    • 4-8 Stunden
+    
+    ### Lagerung
+    **Behälter:** Dunkelglas, Papiertüten  
+    **Bedingungen:** Kühl, trocken, dunkel  
+    **Haltbarkeit:** Blüten/Blätter 1 Jahr, Wurzeln 2-3 Jahre  
+    **Beschriften:** Name, Pflanzenteil, Datum
+    """)
     
     # 🧴 UMSCHLÄGE & BÄDER
-    with st.expander("🧴 **Umschläge & Bäder**", expanded=False):
-        st.markdown("""
-        ### Kalter Umschlag
-        **Wann:** Entzündungen, Schwellungen, Prellungen  
-        **Wie:** Starken Tee (3-4 TL) zubereiten, abkühlen, Tuch tränken, 15-20 Min auflegen  
-        **Beispiel:** Arnika bei Prellungen
-        
-        ### Warmer Umschlag
-        **Wann:** Verspannungen, Krämpfe  
-        **Wie:** Heißen Tee, Tuch tränken (nicht zu heiß!), 20-30 Min auflegen  
-        **Beispiel:** Kamille bei Bauchschmerzen
-        
-        ### Breiumschlag (Frisch)
-        **Wann:** Insektenstiche, erste Hilfe unterwegs  
-        **Wie:** Frische Blätter zerquetschen, direkt auflegen  
-        **Beispiel:** Spitzwegerich bei Mückenstichen
-        
-        ### Vollbad
-        **Wie:** 100-200g Kräuter auf 2-3L Wasser, Sud ins Bad, 36-38°C, max. 20 Min  
-        **Beispiele:** Kamille (Haut), Thymian (Atemwege)
-        
-        ### Sitzbad
-        **Wie:** 50g Kräuter auf 1L Wasser, Sud in Sitzwanne, 36-38°C, 10-15 Min  
-        **Beispiel:** Kamille bei Hämorrhoiden
-        """)
+    st.markdown("---")
+    st.markdown("## 🧴 Umschläge & Bäder")
+    st.markdown("""
+    ### Kalter Umschlag
+    **Wann:** Entzündungen, Schwellungen, Prellungen  
+    **Wie:** Starken Tee (3-4 TL) zubereiten, abkühlen, Tuch tränken, 15-20 Min auflegen  
+    **Beispiel:** Arnika bei Prellungen
+    
+    ### Warmer Umschlag
+    **Wann:** Verspannungen, Krämpfe  
+    **Wie:** Heißen Tee, Tuch tränken (nicht zu heiß!), 20-30 Min auflegen  
+    **Beispiel:** Kamille bei Bauchschmerzen
+    
+    ### Breiumschlag (Frisch)
+    **Wann:** Insektenstiche, erste Hilfe unterwegs  
+    **Wie:** Frische Blätter zerquetschen, direkt auflegen  
+    **Beispiel:** Spitzwegerich bei Mückenstichen
+    
+    ### Vollbad
+    **Wie:** 100-200g Kräuter auf 2-3L Wasser, Sud ins Bad, 36-38°C, max. 20 Min  
+    **Beispiele:** Kamille (Haut), Thymian (Atemwege)
+    
+    ### Sitzbad
+    **Wie:** 50g Kräuter auf 1L Wasser, Sud in Sitzwanne, 36-38°C, 10-15 Min  
+    **Beispiel:** Kamille bei Hämorrhoiden
+    """)
     
     # 💊 TINKTUREN & SALBEN
-    with st.expander("💊 **Tinkturen & Salben**", expanded=False):
-        st.markdown("""
-        ### Tinktur (alkoholischer Auszug)
-        **Herstellung:**  
-        1. Glas zu 1/3-1/2 mit Kräutern füllen  
-        2. Mit 40-70% Alkohol (Korn, Wodka) bedecken  
-        3. 2-6 Wochen ziehen, täglich schütteln  
-        4. Abseihen, in dunkle Tropfflasche füllen  
-        
-        **Dosierung:** 3x täglich 20-30 Tropfen in Wasser  
-        **Haltbarkeit:** 3-5 Jahre  
-        **Nicht für:** Kinder, Schwangere, Alkoholiker
-        
-        ### Ölauszug
-        **Herstellung:**  
-        1. Getrocknete Kräuter (2/3) in Glas  
-        2. Mit Öl (Oliven-, Mandelöl) bedecken  
-        3. 4-6 Wochen auf Fensterbank, täglich schütteln  
-        4. Abseihen  
-        
-        **Verwendung:** Massage, Basis für Salben  
-        **Haltbarkeit:** 6-12 Monate  
-        **Beispiel:** Johanniskraut-Rotöl
-        
-        ### Salbe
-        **Rezept:** 100ml Ölauszug + 10-15g Bienenwachs  
-        **Herstellung:** Im Wasserbad schmelzen, in Tiegel füllen  
-        **Haltbarkeit:** 6-12 Monate
-        """)
+    st.markdown("---")
+    st.markdown("## 💊 Tinkturen & Salben")
+    st.markdown("""
+    ### Tinktur (alkoholischer Auszug)
+    **Herstellung:**  
+    1. Glas zu 1/3-1/2 mit Kräutern füllen  
+    2. Mit 40-70% Alkohol (Korn, Wodka) bedecken  
+    3. 2-6 Wochen ziehen, täglich schütteln  
+    4. Abseihen, in dunkle Tropfflasche füllen  
+    
+    **Dosierung:** 3x täglich 20-30 Tropfen in Wasser  
+    **Haltbarkeit:** 3-5 Jahre  
+    **Nicht für:** Kinder, Schwangere, Alkoholiker
+    
+    ### Ölauszug
+    **Herstellung:**  
+    1. Getrocknete Kräuter (2/3) in Glas  
+    2. Mit Öl (Oliven-, Mandelöl) bedecken  
+    3. 4-6 Wochen auf Fensterbank, täglich schütteln  
+    4. Abseihen  
+    
+    **Verwendung:** Massage, Basis für Salben  
+    **Haltbarkeit:** 6-12 Monate  
+    **Beispiel:** Johanniskraut-Rotöl
+    
+    ### Salbe
+    **Rezept:** 100ml Ölauszug + 10-15g Bienenwachs  
+    **Herstellung:** Im Wasserbad schmelzen, in Tiegel füllen  
+    **Haltbarkeit:** 6-12 Monate
+    """)
     
     # ⚠️ SICHERHEIT
-    with st.expander("⚠️ **Sicherheit & Dosierung**", expanded=False):
-        st.markdown("""
-        ### Dosierung
-        **Erwachsene:** 1-2 TL getrocknete Kräuter pro Tasse, 2-3 Tassen täglich  
-        **Kinder (6-12 Jahre):** Halbe Dosis  
-        **Kinder (2-6 Jahre):** Viertel Dosis, nur milde Kräuter  
-        **Säuglinge:** Nur nach ärztlicher Anweisung!
-        
-        ### Anwendungsdauer
-        **Akut (Erkältung):** Max. 2-3 Wochen  
-        **Chronisch:** 6-8 Wochen, dann 2 Wochen Pause  
-        **Kuren:** 4-6 Wochen, dann 4 Wochen Pause
-        
-        ### Schwangerschaft & Stillzeit
-        **❌ Nicht verwenden:** Johanniskraut, Salbei (therapeutisch), Gundermann, Schafgarbe  
-        **✅ In Maßen ok:** Kamille, Fenchel, Lindenblüten, Melisse  
-        **Grundregel:** IMMER mit Arzt/Hebamme absprechen!
-        
-        ### Wechselwirkungen
-        **Johanniskraut:** Viele! (Antidepressiva, Pille, Blutverdünner)  
-        **Baldrian:** Verstärkt Schlafmittel  
-        **Grundregel:** Bei Dauermedikation Arzt/Apotheker fragen!
-        
-        ### Wann zum Arzt?
-        - Starke Schmerzen, hohes Fieber (>39°C)
-        - Atemnot, allergische Reaktionen
-        - Keine Besserung nach 1 Woche
-        - Bei chronischen Erkrankungen immer ärztliche Begleitung
-        
-        ### Korbblütler-Allergie
-        **Vorsicht bei:** Kamille, Arnika, Ringelblume, Schafgarbe  
-        **Test:** Kleine Menge trinken, 24h warten  
-        **Bei Allergie:** Diese Pflanzen meiden!
-        """)
+    st.markdown("---")
+    st.markdown("## ⚠️ Sicherheit & Dosierung")
+    st.markdown("""
+    ### Dosierung
+    **Erwachsene:** 1-2 TL getrocknete Kräuter pro Tasse, 2-3 Tassen täglich  
+    **Kinder (6-12 Jahre):** Halbe Dosis  
+    **Kinder (2-6 Jahre):** Viertel Dosis, nur milde Kräuter  
+    **Säuglinge:** Nur nach ärztlicher Anweisung!
+    
+    ### Anwendungsdauer
+    **Akut (Erkältung):** Max. 2-3 Wochen  
+    **Chronisch:** 6-8 Wochen, dann 2 Wochen Pause  
+    **Kuren:** 4-6 Wochen, dann 4 Wochen Pause
+    
+    ### Schwangerschaft & Stillzeit
+    **❌ Nicht verwenden:** Johanniskraut, Salbei (therapeutisch), Gundermann, Schafgarbe  
+    **✅ In Maßen ok:** Kamille, Fenchel, Lindenblüten, Melisse  
+    **Grundregel:** IMMER mit Arzt/Hebamme absprechen!
+    
+    ### Wechselwirkungen
+    **Johanniskraut:** Viele! (Antidepressiva, Pille, Blutverdünner)  
+    **Baldrian:** Verstärkt Schlafmittel  
+    **Grundregel:** Bei Dauermedikation Arzt/Apotheker fragen!
+    
+    ### Wann zum Arzt?
+    - Starke Schmerzen, hohes Fieber (>39°C)
+    - Atemnot, allergische Reaktionen
+    - Keine Besserung nach 1 Woche
+    - Bei chronischen Erkrankungen immer ärztliche Begleitung
+    
+    ### Korbblütler-Allergie
+    **Vorsicht bei:** Kamille, Arnika, Ringelblume, Schafgarbe  
+    **Test:** Kleine Menge trinken, 24h warten  
+    **Bei Allergie:** Diese Pflanzen meiden!
+    """)
     
     st.markdown("---")
     
@@ -876,6 +867,30 @@ elif page == "📖 Anwendungs-Guide":
     immer einen Arzt konsultieren. Heilkräuter sind wirksam, aber nicht harmlos - 
     richtige Anwendung ist entscheidend!
     """)
+
+# Info-Box mit Statistiken
+st.markdown("---")
+st.markdown("""
+<div style="background: linear-gradient(135deg, #4caf50 0%, #45a049 100%); 
+            color: white; padding: 20px; border-radius: 10px; margin: 20px 0;
+            text-align: center;">
+    <h3 style="margin: 0 0 10px 0; color: white;">🌿 Datenbank-Info</h3>
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px;">
+        <div>
+            <div style="font-size: 2rem; font-weight: bold;">36</div>
+            <div style="font-size: 0.9rem; opacity: 0.9;">Heilpflanzen</div>
+        </div>
+        <div>
+            <div style="font-size: 2rem; font-weight: bold;">100%</div>
+            <div style="font-size: 0.9rem; opacity: 0.9;">Wissenschaftlich belegt</div>
+        </div>
+        <div>
+            <div style="font-size: 2rem; font-weight: bold;">🔬</div>
+            <div style="font-size: 0.9rem; opacity: 0.9;">ESCOP + Kommission E</div>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # Back to Top Button
 components.html("""
