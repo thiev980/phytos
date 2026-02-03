@@ -574,8 +574,8 @@ elif page == "📚 Alle Pflanzen":
             st.markdown(f"**⚠️ Nebenwirkungen:** {pflanze['nebenwirkungen']}")
             st.markdown(f"**🚫 Kontraindikationen:** {pflanze['kontraindikationen']}")
 
-# Tab 6: Pflanze erkennen
-with tab6:
+# Seite 6: Pflanze erkennen
+elif page == "📸 Pflanze erkennen":
     st.header("📸 Pflanze erkennen")
     st.markdown("""
     Lade ein Foto einer Pflanze hoch und die App versucht, sie zu identifizieren.
@@ -714,8 +714,8 @@ with tab6:
             else:
                 st.error("❌ Fehler bei der Identifikation. Bitte versuche es erneut.")
 
+
 elif page == "📖 Anwendungs-Guide":
-    track_plausible_event("Guide View", {"section": "overview"})
     
     st.header("📖 Anwendungs-Guide für Heilkräuter")
     st.markdown("*Praktisches Wissen für die sichere Anwendung zu Hause*")
