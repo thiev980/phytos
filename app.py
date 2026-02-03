@@ -199,6 +199,17 @@ st.markdown("""
             padding: 8px 12px;
             font-size: 0.9rem;
         }
+        
+        /* Sidebar optimization for mobile */
+        [data-testid="stSidebar"] {
+            width: 100%;
+        }
+        
+        /* Make radio buttons larger on mobile */
+        .stRadio > label {
+            font-size: 1.1rem;
+            padding: 12px 8px;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -411,26 +422,40 @@ with st.expander("ℹ️ Über diese Datenbank - Jetzt lesen!"):
 
 st.markdown("---")
 
-# Mobile hint
-st.markdown("""
-<div style="background-color: #e3f2fd; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
-📱 <strong>Mobil?</strong> Die Tabs lassen sich horizontal scrollen (wischen) →
-</div>
-""", unsafe_allow_html=True)
+# Sidebar Navigation (besser für Mobile!)
+with st.sidebar:
+    st.markdown("### 🧭 Navigation")
+    
+    page = st.radio(
+        "Wähle eine Ansicht:",
+        [
+            "🔍 Nach Symptom suchen",
+            "💊 Nach Wirkung suchen",
+            "🌿 Nach Pflanze suchen",
+            "📅 Nach Erntezeit suchen",
+            "📚 Alle Pflanzen",
+            "📸 Pflanze erkennen",
+            "📖 Anwendungs-Guide"
+        ],
+        label_visibility="collapsed"
+    )
+    
+    st.markdown("---")
+    
+    # Quick Info
+    st.caption(f"🌿 **{len(pflanzen)} Heilpflanzen** in der Datenbank")
+    st.caption("📅 Stand: Februar 2026")
+    
+    st.markdown("---")
+    
+    # Plausible Analytics Privacy Note
+    st.caption("""
+    🔒 **Privacy:** Diese App nutzt Plausible Analytics 
+    (DSGVO-konform, ohne Cookies)
+    """)
 
-# Tabs für verschiedene Suchoptionen
-tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
-    "🔍 Symptom",
-    "💊 Wirkung", 
-    "🌿 Pflanze",
-    "📅 Erntezeit",
-    "📚 Alle",
-    "📸 Erkennen",
-    "📖 Guide"
-])
-
-# Tab 1: Suche nach Symptom
-with tab1:
+# Content basierend auf Seitenauswahl
+if page == "🔍 Nach Symptom suchen":
     st.header("Suche nach Symptom")
     st.markdown("*Wähle ein Symptom, um passende Heilpflanzen zu finden*")
     
@@ -454,8 +479,7 @@ with tab1:
         else:
             st.warning("Keine Pflanzen gefunden.")
 
-# Tab 2: Suche nach Wirkung
-with tab2:
+elif page == "💊 Nach Wirkung suchen":
     st.header("Suche nach Wirkung")
     st.markdown("*Finde Heilpflanzen mit bestimmten pharmakologischen Wirkungen*")
     
@@ -479,8 +503,7 @@ with tab2:
         else:
             st.warning("Keine Pflanzen gefunden.")
 
-# Tab 3: Suche nach Pflanze
-with tab3:
+elif page == "🌿 Nach Pflanze suchen":
     st.header("Suche nach Pflanze")
     st.markdown("*Detaillierte Informationen zu einzelnen Heilpflanzen*")
     
@@ -498,8 +521,7 @@ with tab3:
         if pflanze:
             zeige_pflanze(pflanze, show_details=True)
 
-# Tab 4: Suche nach Erntezeit
-with tab4:
+elif page == "📅 Nach Erntezeit suchen":
     st.header("Suche nach Erntezeit")
     st.markdown("*Finde heraus, welche Heilkräuter gerade Saison haben*")
     
@@ -527,8 +549,7 @@ with tab4:
     else:
         st.info(f"Keine Pflanzen für {monat} in der Datenbank.")
 
-# Tab 5: Alle Pflanzen
-with tab5:
+elif page == "📚 Alle Pflanzen":
     st.header("Alle Pflanzen (Übersicht)")
     st.markdown(f"*Gesamte Datenbank: {len(pflanzen)} wissenschaftlich belegte Heilpflanzen*")
     
@@ -693,8 +714,7 @@ with tab6:
             else:
                 st.error("❌ Fehler bei der Identifikation. Bitte versuche es erneut.")
 
-# Tab 7: Anwendungs-Guide
-with tab7:
+elif page == "📖 Anwendungs-Guide":
     track_plausible_event("Guide View", {"section": "overview"})
     
     st.header("📖 Anwendungs-Guide für Heilkräuter")
