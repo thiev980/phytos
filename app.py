@@ -145,6 +145,61 @@ st.markdown("""
     .disclaimer strong {
         color: #856404;
     }
+    
+    /* Back to top button */
+    .back-to-top {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        background-color: #4caf50;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        transition: all 0.3s;
+    }
+    .back-to-top:hover {
+        background-color: #45a049;
+        transform: translateY(-5px);
+    }
+    
+    @media (max-width: 768px) {
+        .back-to-top {
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+        }
+    }
+    
+    /* Improved mobile tabs */
+    @media (max-width: 768px) {
+        [data-testid="stHorizontalBlock"] {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Make tabs wrap on mobile */
+        .stTabs [data-baseweb="tab-list"] {
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .stTabs [data-baseweb="tab"] {
+            flex-shrink: 0;
+            white-space: nowrap;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -282,17 +337,31 @@ def zeige_pflanze(pflanze, show_details=False):
                 st.markdown(f"**Nebenwirkungen:** {pflanze['nebenwirkungen']}")
                 st.markdown(f"**Kontraindikationen:** {pflanze['kontraindikationen']}")
 
-# Header mit SEO-Content
-st.markdown('<div class="main-header">🌿 Europäische Heilkräuter-Datenbank</div>', unsafe_allow_html=True)
+# Header mit SEO-Content - klickbar für Zurück zum Start
+st.markdown("""
+<style>
+.main-header-link {
+    text-decoration: none;
+    color: inherit;
+}
+.main-header-link:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+</style>
+<a href="#europäische-heilkräuter-datenbank" class="main-header-link">
+<div class="main-header">🌿 Europäische Heilkräuter-Datenbank</div>
+</a>
+""", unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Wissenschaftlich belegte Heilpflanzen für die einfache Anwendung</div>', unsafe_allow_html=True)
 
 # SEO-optimierter Intro-Text (kollabierbar)
-with st.expander("ℹ️ Über diese Datenbank - Klicken zum Aufklappen"):
+with st.expander("ℹ️ Über diese Datenbank - Jetzt lesen!"):
     st.markdown("""
     <div class="seo-text">
     <h3>🌿 Heilkräuter aus der Schweiz und Europa – Wissenschaftlich fundiert</h3>
     
-    Willkommen in der **wissenschaftlich fundierten Heilpflanzen-Datenbank mit integrierter KI-Pflanzenerkennung**. 
+    Willkommen in der **wissenschaftlich fundierten Heilpflanzen-Datenbank mit integrierter KI-Pflanzenerkennung**! 
     Entdecke über **26 sorgfältig recherchierte Heilkräuter** mit praktischen Anwendungen, 
     die du zu Hause selbst umsetzen kannst.
     
@@ -342,15 +411,22 @@ with st.expander("ℹ️ Über diese Datenbank - Klicken zum Aufklappen"):
 
 st.markdown("---")
 
+# Mobile hint
+st.markdown("""
+<div style="background-color: #e3f2fd; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+📱 <strong>Mobil?</strong> Die Tabs lassen sich horizontal scrollen (wischen) →
+</div>
+""", unsafe_allow_html=True)
+
 # Tabs für verschiedene Suchoptionen
 tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
-    "🔍 Nach Symptom suchen",
-    "💊 Nach Wirkung suchen", 
-    "🌿 Nach Pflanze suchen",
-    "📅 Nach Erntezeit suchen",
-    "📚 Alle Pflanzen",
-    "📸 Pflanze erkennen",
-    "📖 Anwendungs-Guide"
+    "🔍 Symptom",
+    "💊 Wirkung", 
+    "🌿 Pflanze",
+    "📅 Erntezeit",
+    "📚 Alle",
+    "📸 Erkennen",
+    "📖 Guide"
 ])
 
 # Tab 1: Suche nach Symptom
@@ -780,6 +856,15 @@ with tab7:
     immer einen Arzt konsultieren. Heilkräuter sind wirksam, aber nicht harmlos - 
     richtige Anwendung ist entscheidend!
     """)
+
+# Back to Top Button
+components.html("""
+<a href="#europäische-heilkräuter-datenbank" style="text-decoration: none;">
+    <div class="back-to-top" title="Zurück nach oben">
+        ↑
+    </div>
+</a>
+""", height=0)
 
 # Footer mit SEO-Content
 st.markdown("---")
