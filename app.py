@@ -434,6 +434,9 @@ st.markdown("""
     <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 0.9rem;">
     Klicke auf eine Kategorie, um sie zu öffnen
     </p>
+    <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 0.9rem;">
+    💡 Tipp: Schliesse die vorherige Section, bevor du eine neue öffnest
+    </p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -718,9 +721,9 @@ with st.expander("📖 **Anwendungs-Guide**", expanded=False):
     st.markdown("---")
     st.markdown("## 🍵 Tee-Zubereitung")
     st.markdown("""
-    ### Heißer Aufguss (Infus)
+    ### Heisser Aufguss (Infus)
     **Für:** Blüten, Blätter (Kamille, Pfefferminze, Thymian)  
-    **Methode:** 1-2 TL mit kochendem Wasser übergießen, zudecken, 5-10 Min ziehen, abseihen  
+    **Methode:** 1-2 TL mit kochendem Wasser übergiessen, zudecken, 5-10 Min ziehen, abseihen  
     **Wichtig:** Zudecken, damit ätherische Öle nicht verdampfen!
     
     ### Kaltauszug (Mazeration)
@@ -742,7 +745,7 @@ with st.expander("📖 **Anwendungs-Guide**", expanded=False):
     st.markdown("""
     ### Sammeln
     **Wann:** Vormittag nach dem Tau (10-12 Uhr), trockenes Wetter  
-    **Wo:** Saubere Standorte, nicht an Straßen!  
+    **Wo:** Saubere Standorte, nicht an Strassen!  
     **Wie:** Max. 1/3 ernten, geschützte Arten meiden (Arnika!)
     
     ### Trocknen
@@ -774,7 +777,7 @@ with st.expander("📖 **Anwendungs-Guide**", expanded=False):
     
     ### Warmer Umschlag
     **Wann:** Verspannungen, Krämpfe  
-    **Wie:** Heißen Tee, Tuch tränken (nicht zu heiß!), 20-30 Min auflegen  
+    **Wie:** Heissen Tee, Tuch tränken (nicht zu heiss!), 20-30 Min auflegen  
     **Beispiel:** Kamille bei Bauchschmerzen
     
     ### Breiumschlag (Frisch)
@@ -840,7 +843,7 @@ with st.expander("📖 **Anwendungs-Guide**", expanded=False):
     
     ### Schwangerschaft & Stillzeit
     **❌ Nicht verwenden:** Johanniskraut, Salbei (therapeutisch), Gundermann, Schafgarbe  
-    **✅ In Maßen ok:** Kamille, Fenchel, Lindenblüten, Melisse  
+    **✅ In Massen ok:** Kamille, Fenchel, Lindenblüten, Melisse  
     **Grundregel:** IMMER mit Arzt/Hebamme absprechen!
     
     ### Wechselwirkungen
@@ -906,7 +909,7 @@ st.markdown("---")
 st.markdown("""
 <div class="disclaimer">
 <strong>⚠️ Wichtiger medizinischer Hinweis:</strong><br>
-Diese Datenbank dient ausschließlich zu Informationszwecken. Die Informationen ersetzen keine 
+Diese Datenbank dient ausschliesslich zu Informationszwecken. Die Informationen ersetzen keine 
 ärztliche Beratung, Diagnose oder Behandlung. Bei ernsthaften gesundheitlichen Beschwerden 
 konsultieren Sie bitte einen Arzt, Apotheker oder Heilpraktiker. Auch pflanzliche Mittel können 
 Nebenwirkungen haben und mit Medikamenten interagieren.
